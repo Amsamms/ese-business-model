@@ -228,6 +228,54 @@
   <span class="badge">April 2026 · v2</span>
 </header>
 
+<!-- ═══════════════ AT A GLANCE ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>At a Glance</h2>
+    <p class="intro">Two tracks, one strategy. Everything you need to understand in 60 seconds — the numbers update as you adjust the sliders below.</p>
+
+    <div class="two-col">
+      <div class="card" style="border-left:4px solid var(--blue);">
+        <h4>Track A — Sell to Engineers</h4>
+        <p style="font-size:0.88rem;color:var(--muted);margin:4px 0 10px;">Individual engineers subscribe to an AI copilot, like ChatGPT but specialized for refinery work. Cash-flow track that builds product-market fit and a user community.</p>
+        <div class="stat-row">
+          <div class="stat-card"><div class="big" style="font-size:1.15rem;"><span class="live-val" id="sum_a_y1u">150</span></div><div class="lbl">Users Y1</div></div>
+          <div class="stat-card"><div class="big" style="font-size:1.15rem;"><span class="live-val" id="sum_a_y3u">2,400</span></div><div class="lbl">Users Y3</div></div>
+          <div class="stat-card"><div class="big" style="font-size:1.15rem;"><span class="live-val" id="sum_a_y3r">8.8M</span> EGP</div><div class="lbl">Revenue Y3</div></div>
+          <div class="stat-card"><div class="big green" style="font-size:1.15rem;"><span class="live-val" id="sum_a_y3n">+3.5M</span> EGP</div><div class="lbl">Net Y3</div></div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:6px;"><strong>Price range:</strong> 600 – 48,000 EGP/yr &nbsp;|&nbsp; <strong>Breaks even:</strong> ~22 months alone</p>
+      </div>
+      <div class="card" style="border-left:4px solid var(--gold);">
+        <h4>Track B — Sell to Refineries</h4>
+        <p style="font-size:0.88rem;color:var(--muted);margin:4px 0 10px;">ESE deployed inside EGPC refineries at Egyptian prices. Strategic market-entry track — builds the reference base needed for high-ticket Model C deals from Year 4.</p>
+        <div class="stat-row">
+          <div class="stat-card"><div class="big" style="font-size:1.15rem;"><span class="live-val" id="sum_b_y1c">3</span></div><div class="lbl">Refineries Y1</div></div>
+          <div class="stat-card"><div class="big" style="font-size:1.15rem;"><span class="live-val" id="sum_b_y3c">10</span></div><div class="lbl">Refineries Y3</div></div>
+          <div class="stat-card"><div class="big" style="font-size:1.15rem;"><span class="live-val" id="sum_b_y3r">2.3M</span> EGP</div><div class="lbl">Revenue Y3</div></div>
+          <div class="stat-card"><div class="big red" style="font-size:1.15rem;"><span class="live-val" id="sum_b_y3n">-1.4M</span> EGP</div><div class="lbl">Net Y3</div></div>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:6px;"><strong>Price range:</strong> 100K – 200K EGP/yr &nbsp;|&nbsp; <strong>Strategic:</strong> profitable Y4+</p>
+      </div>
+    </div>
+
+    <!-- Combined result -->
+    <div class="highlight" style="margin-top:16px;text-align:center;padding:14px 18px;">
+      <strong style="font-size:0.95rem;">Combined over 3 years:</strong>
+      <span style="font-size:0.93rem;">
+        Invest <strong><span class="live-val" id="sum_total_invest">20.5M</span> EGP</strong> &nbsp;→&nbsp;
+        Earn <strong><span class="live-val" id="sum_total_rev">17.2M</span> EGP</strong> &nbsp;→&nbsp;
+        Net <strong style="color:var(--red);"><span class="live-val" id="sum_total_net">-3.3M</span> EGP</strong>
+        &nbsp;|&nbsp; <strong>Payback: <span class="live-val" id="sum_payback">Beyond 3 years</span></strong>
+      </span>
+    </div>
+
+    <p style="font-size:0.82rem;color:var(--muted);text-align:center;margin-top:8px;">
+      Drag the sliders in <a href="#calculator" style="color:var(--blue);font-weight:600;">the calculator below</a> to test different scenarios — this summary updates instantly.
+    </p>
+  </div>
+</section>
+
 <!-- ═══════════════ HOW ESE MAKES MONEY ═══════════════ -->
 <section>
   <div class="container">
@@ -692,6 +740,30 @@ function recalc() {
   document.getElementById('cost_mkt_pct').textContent = Math.round(mktCost/citot*100);
   document.getElementById('cost_infra_pct').textContent = Math.round(infraCost/citot*100);
   document.getElementById('cost_legal_pct').textContent = Math.round(legalCost/citot*100);
+
+  // ── EXECUTIVE SUMMARY (At a Glance) ──
+  document.getElementById('sum_a_y1u').textContent = a_y1.toLocaleString('en-US');
+  document.getElementById('sum_a_y3u').textContent = a_y3.toLocaleString('en-US');
+  document.getElementById('sum_a_y3r').textContent = fmtM(a_rev[2]) + ' EGP';
+  document.getElementById('sum_a_y3n').textContent = sgn(a_net[2]) + fmtM(a_net[2]) + ' EGP';
+  document.getElementById('sum_a_y3n').style.color = a_net[2] >= 0 ? '#38a169' : '#e53e3e';
+  document.getElementById('sum_b_y1c').textContent = b_y1;
+  document.getElementById('sum_b_y3c').textContent = b_y3;
+  document.getElementById('sum_b_y3r').textContent = fmtM(b_rev[2]) + ' EGP';
+  document.getElementById('sum_b_y3n').textContent = sgn(b_net[2]) + fmtM(b_net[2]) + ' EGP';
+  document.getElementById('sum_b_y3n').style.color = b_net[2] >= 0 ? '#38a169' : '#e53e3e';
+  document.getElementById('sum_total_invest').textContent = fmtM(citot) + ' EGP';
+  document.getElementById('sum_total_rev').textContent = fmtM(ctot) + ' EGP';
+  document.getElementById('sum_total_net').textContent = sgn(ccum) + fmtM(ccum) + ' EGP';
+  document.getElementById('sum_total_net').style.color = ccum >= 0 ? '#38a169' : '#e53e3e';
+  if (payback) {
+    const sy = Math.floor(payback/12), smo = payback%12;
+    document.getElementById('sum_payback').textContent = sy>0 ? (smo>0 ? sy+' yr '+smo+' mo' : sy+' yr') : smo+' mo';
+    document.getElementById('sum_payback').style.color = '#38a169';
+  } else {
+    document.getElementById('sum_payback').textContent = 'Beyond 3 years';
+    document.getElementById('sum_payback').style.color = '#e53e3e';
+  }
 
   // ── TRACK SUMMARIES ──
   document.getElementById('ma_summary').innerHTML =
