@@ -453,15 +453,16 @@
 
 const fmt = (n) => {
   const abs = Math.abs(Math.round(n));
-  if (abs >= 1000000) return (n/1000000).toFixed(2) + 'M';
-  return abs.toLocaleString('en-US') + 'K';
+  const neg = n < 0 ? '-' : '';
+  if (abs >= 1000000) return neg + (abs/1000000).toFixed(2) + 'M';
+  return neg + abs.toLocaleString('en-US') + 'K';
 };
 const fmtEGP = (n) => {
   const abs = Math.abs(Math.round(n));
   return abs.toLocaleString('en-US');
 };
 const color = (n) => n >= 0 ? 'pos' : 'neg';
-const sign = (n) => n >= 0 ? '+' : '';
+const sign = (n) => n >= 0 ? '+' : '-';
 
 function recalc() {
   // --- Read slider values ---
