@@ -453,9 +453,8 @@
 
 const fmt = (n) => {
   const abs = Math.abs(Math.round(n));
-  const neg = n < 0 ? '-' : '';
-  if (abs >= 1000000) return neg + (abs/1000000).toFixed(2) + 'M';
-  return neg + abs.toLocaleString('en-US') + 'K';
+  if (abs >= 1000000) return (abs/1000000).toFixed(2) + 'M';
+  return abs.toLocaleString('en-US') + 'K';
 };
 const fmtEGP = (n) => {
   const abs = Math.abs(Math.round(n));
