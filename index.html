@@ -349,6 +349,110 @@
   </div>
 </section>
 
+<!-- ═══════════════ INFRASTRUCTURE & EQUIPMENT ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>Infrastructure &amp; Equipment — What We Run On</h2>
+    <p class="intro">ESE needs AI computing power. The strategy is <strong>cloud-first, self-host later</strong> — start cheap, prove the model, then buy hardware only when the user base justifies it.</p>
+
+    <h3 style="color:var(--blue);margin-top:20px;">Phase 1 — Cloud (Year 1–2)</h3>
+    <div class="two-col">
+      <div class="card">
+        <h4>Year 1 — Claude API</h4>
+        <p style="font-size:0.86rem;color:var(--muted);">We use Anthropic's Claude Haiku API while user count is low. No hardware to buy. Pay per token.</p>
+        <div class="stat-row" style="margin:10px 0;">
+          <div class="stat-card"><div class="big" style="font-size:1.1rem;">~80K</div><div class="lbl">EGP/year at 150 users</div></div>
+          <div class="stat-card"><div class="big" style="font-size:1.1rem;">0</div><div class="lbl">Capital cost</div></div>
+          <div class="stat-card"><div class="big" style="font-size:1.1rem;">Pay-per-use</div><div class="lbl">Scales with activity</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Year 2 — RunPod Cloud GPU</h4>
+        <p style="font-size:0.86rem;color:var(--muted);">When paid users cross ~100, we migrate to our own AI model (Qwen3-32B) on cloud GPUs. Fixed monthly cost regardless of usage.</p>
+        <div class="stat-row" style="margin:10px 0;">
+          <div class="stat-card"><div class="big" style="font-size:1.1rem;">~90K</div><div class="lbl">EGP/month flat</div></div>
+          <div class="stat-card"><div class="big" style="font-size:1.1rem;">~1.08M</div><div class="lbl">EGP/year</div></div>
+          <div class="stat-card"><div class="big" style="font-size:1.1rem;">0</div><div class="lbl">Capital cost</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="color:var(--blue);margin-top:24px;">Phase 2 — Self-Hosted Hardware (Year 3+, when ready)</h3>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:12px;">Buying our own GPU server in Egypt eliminates the monthly cloud bill. This is a <strong>capital investment</strong> — one-time purchase, then only electricity + maintenance. All prices are Egyptian landed (including 30–50% customs markup).</p>
+
+    <div class="table-wrap">
+    <table>
+      <tr><th>Tier</th><th>What We Get</th><th>GPUs</th><th>Server Model</th><th>Capital Cost (EGP)</th><th>Capacity</th></tr>
+      <tr>
+        <td><strong>Tier 3</strong><br><span style="font-size:0.75rem;color:var(--muted);">Recommended</span></td>
+        <td>Qwen3-32B × 4 instances</td>
+        <td>4× A100 80GB</td>
+        <td>Dell PowerEdge R760xa</td>
+        <td><strong>5.2 – 7.3M</strong></td>
+        <td>80–100 concurrent users</td>
+      </tr>
+      <tr>
+        <td><strong>Tier 2</strong></td>
+        <td>GLM 5.1 INT4 (higher quality)</td>
+        <td>8× A100 80GB</td>
+        <td>Dell PowerEdge XE9680</td>
+        <td><strong>10.4 – 14.6M</strong></td>
+        <td>20–30 concurrent users</td>
+      </tr>
+      <tr>
+        <td><strong>Tier 1</strong></td>
+        <td>GLM 5.1 FP8 (best quality)</td>
+        <td>8× H200 141GB</td>
+        <td>Dell PowerEdge XE9680</td>
+        <td><strong>18.2 – 23.4M</strong></td>
+        <td>30–40 concurrent users</td>
+      </tr>
+    </table>
+    </div>
+
+    <h3 style="color:var(--blue);margin-top:20px;">Individual GPU Pricing (Egypt, April 2026)</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>GPU</th><th>VRAM</th><th>USD Each</th><th>EGP Each (landed)</th><th>Egyptian Source</th></tr>
+      <tr><td>NVIDIA A100 80GB PCIe</td><td>80 GB</td><td>$15,000–$17,000</td><td><strong>~1,135,000</strong></td><td>ServerBasket Egypt</td></tr>
+      <tr><td>NVIDIA H100 80GB SXM5</td><td>80 GB</td><td>$35,000–$40,000</td><td><strong>~1,820,000–2,080,000</strong></td><td>OEM (in-server)</td></tr>
+      <tr><td>NVIDIA H200 141GB SXM5</td><td>141 GB</td><td>$35,000–$45,000</td><td><strong>~1,820,000–2,340,000</strong></td><td>OEM (in-server)</td></tr>
+      <tr><td>NVIDIA RTX 4090 24GB</td><td>24 GB</td><td>$2,100–$3,000</td><td><strong>110,000–155,000</strong></td><td>Baraka / Compumarts</td></tr>
+      <tr><td>NVIDIA RTX 5090 32GB</td><td>32 GB</td><td>$3,000–$3,850</td><td><strong>157,000–200,000</strong></td><td>Compumarts / Baraka</td></tr>
+    </table>
+    </div>
+
+    <h3 style="color:var(--blue);margin-top:20px;">Cloud vs. Buy — When Does Hardware Pay Off?</h3>
+    <div class="table-wrap">
+    <table>
+      <tr><th>Configuration</th><th>Cloud (RunPod/yr)</th><th>Buy Hardware (landed)</th><th>Break-even</th></tr>
+      <tr>
+        <td><strong>2× A100</strong> (Qwen3-32B)</td>
+        <td>~1.08M EGP/yr</td>
+        <td>5.2–7.3M EGP</td>
+        <td><strong>5–7 years</strong></td>
+      </tr>
+      <tr>
+        <td><strong>8× A100</strong> (GLM 5.1 INT4)</td>
+        <td>~4.34M EGP/yr</td>
+        <td>10.4–14.6M EGP</td>
+        <td><strong>3–5 years</strong></td>
+      </tr>
+      <tr>
+        <td><strong>8× H100</strong> (GLM 5.1 FP8)</td>
+        <td>~11.99M EGP/yr</td>
+        <td>25.5–32.8M EGP</td>
+        <td><strong>2–3 years</strong></td>
+      </tr>
+    </table>
+    </div>
+
+    <div class="highlight" style="margin-top:16px;">
+      <strong>Recommendation:</strong> Start with cloud (Claude API Y1 → RunPod Y2). Buy hardware only when user count crosses 500+ and the model is proven. This avoids ~5-7M EGP of upfront capital risk. For the full hardware research with vendor links and deployment commands, see the <a href="EPROM-AI-Server-Research_rev2.md" style="color:var(--blue);">AI Server Research document</a>.
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════ WHEN DO WE GET THE MONEY BACK? ═══════════════ -->
 <section id="calculator">
   <div class="container">
