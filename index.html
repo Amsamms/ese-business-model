@@ -724,6 +724,17 @@ const fmtFull = (n) => {
 };
 const sign = (n) => n >= 0 ? '+' : '';
 
+// Document base case financials (in K EGP) — these are the actual numbers
+const MA_BASE_USERS = [150, 900, 2400];
+const MA_BASE_REV   = [650, 4300, 8800];
+const MA_BASE_COST  = [2830, 4280, 5325];
+const MA_BASE_ARPU  = 6000; // blended sticker ARPU (quarterly ramp reduces effective)
+
+const MB_BASE_COMPS = [3, 7, 10];
+const MB_BASE_REV   = [75, 1150, 2250];
+const MB_BASE_COST  = [1856, 2520, 3685];
+const MB_BASE_PRICE = 150; // 50/50 mix of 100K + 200K
+
 // Preset definitions
 const presets = {
   conservative: { a_y1:80, a_y2:400, a_y3:1200, a_arpu:4500, b_y1:2, b_y2:4, b_y3:6, b_mix:25 },
@@ -733,14 +744,9 @@ const presets = {
 
 function setPreset(name) {
   const p = presets[name];
-  document.getElementById('a_y1').value = p.a_y1;
-  document.getElementById('a_y2').value = p.a_y2;
-  document.getElementById('a_y3').value = p.a_y3;
-  document.getElementById('a_arpu').value = p.a_arpu;
-  document.getElementById('b_y1').value = p.b_y1;
-  document.getElementById('b_y2').value = p.b_y2;
-  document.getElementById('b_y3').value = p.b_y3;
-  document.getElementById('b_mix').value = p.b_mix;
+  for (const [id, val] of Object.entries(p)) {
+    document.getElementById(id).value = val;
+  }
   recalc();
 }
 
@@ -764,72 +770,74 @@ function recalc() {
   document.getElementById('b_y3_val').textContent = b_y3;
   document.getElementById('b_mix_val').textContent = Math.round(b_mix * 100) + '%';
 
-  // Model A
-  const a_arpu_y1 = a_arpu;
-  const a_arpu_y2 = a_arpu * 1.2;
-  const a_arpu_y3 = a_arpu * 1.4;
-  const a_rev = [a_y1*a_arpu_y1/1e3, a_y2*a_arpu_y2/1e3, a_y3*a_arpu_y3/1e3];
-  const a_base_cost = [2830, 4280, 5325];
-  const a_base_users = [150, 900, 2400];
-  const a_base_rev = [150*6000/1e3, 900*7200/1e3, 2400*8400/1e3];
-  const a_cost = a_base_cost.map((cb,i) => {
-    const ratio = Math.max(a_rev[i] / a_base_rev[i], 0.2);
-    return Math.round(cb * Math.pow(ratio, 0.7));
+  // ── Model A: scale from documented base case ──
+  // Revenue scales linearly with both user count and ARPU relative to base
+  const a_users = [a_y1, a_y2, a_y3];
+  const a_rev = a_users.map((u, i) => {
+    const userRatio = u / MA_BASE_USERS[i];
+    const arpuRatio = a_arpu / MA_BASE_ARPU;
+    return Math.round(MA_BASE_REV[i] * userRatio * arpuRatio);
+  });
+  // Costs scale sub-linearly with user count (economies of scale)
+  const a_cost = a_users.map((u, i) => {
+    const ratio = Math.max(u / MA_BASE_USERS[i], 0.15);
+    return Math.round(MA_BASE_COST[i] * Math.pow(ratio, 0.7));
   });
   const a_net = [a_rev[0]-a_cost[0], a_rev[1]-a_cost[1], a_rev[2]-a_cost[2]];
   const a_cum = a_net[0]+a_net[1]+a_net[2];
   const a_roi = a_cum / (a_cost[0]+a_cost[1]+a_cost[2]) * 100;
 
-  // Model B
+  // ── Model B: scale from documented base case ──
   const b_avg_price = 100 + b_mix * (200-100);
-  const b_rev = [b_y1*b_avg_price*0.25, b_y2*b_avg_price, b_y3*b_avg_price];
-  const b_base_cost = [1856, 2520, 3685];
-  const b_base_companies = [3, 7, 10];
-  const b_cost = b_base_cost.map((cb,i) => {
-    const ratio = Math.max([b_y1,b_y2,b_y3][i] / b_base_companies[i], 0.3);
-    return Math.round(cb * Math.pow(ratio, 0.6));
+  const b_priceRatio = b_avg_price / MB_BASE_PRICE;
+  const b_comps = [b_y1, b_y2, b_y3];
+  const b_rev = b_comps.map((c, i) => {
+    const compRatio = c / MB_BASE_COMPS[i];
+    return Math.round(MB_BASE_REV[i] * compRatio * b_priceRatio);
+  });
+  const b_cost = b_comps.map((c, i) => {
+    const ratio = Math.max(c / MB_BASE_COMPS[i], 0.25);
+    return Math.round(MB_BASE_COST[i] * Math.pow(ratio, 0.6));
   });
   const b_net = [b_rev[0]-b_cost[0], b_rev[1]-b_cost[1], b_rev[2]-b_cost[2]];
   const b_cum = b_net[0]+b_net[1]+b_net[2];
   const b_roi = b_cum / (b_cost[0]+b_cost[1]+b_cost[2]) * 100;
 
-  // Combined
+  // ── Combined ──
   const comb_rev = [a_rev[0]+b_rev[0], a_rev[1]+b_rev[1], a_rev[2]+b_rev[2]];
   const comb_cost = [a_cost[0]+b_cost[0], a_cost[1]+b_cost[1], a_cost[2]+b_cost[2]];
   const comb_net = [comb_rev[0]-comb_cost[0], comb_rev[1]-comb_cost[1], comb_rev[2]-comb_cost[2]];
   const comb_cum = comb_net[0]+comb_net[1]+comb_net[2];
   const total_investment = comb_cost[0]+comb_cost[1]+comb_cost[2];
+  const total_rev = comb_rev[0]+comb_rev[1]+comb_rev[2];
   const combined_roi = comb_cum / total_investment * 100;
 
-  // Total 3yr revenue
-  const total_rev = comb_rev[0]+comb_rev[1]+comb_rev[2];
-
-  // Payback period estimation (months)
+  // Payback period (months)
   let payback = null;
-  const monthly = [0,0,0];
-  for (let y=0; y<3; y++) monthly[y] = comb_net[y] / 12;
+  for (let y=0; y<3; y++) { if (!comb_net[y]) comb_net[y]=0; }
+  const monthly = comb_net.map(n => n/12);
   let running = 0;
   for (let m=1; m<=36; m++) {
     running += monthly[Math.floor((m-1)/12)];
     if (running >= 0 && payback === null) payback = m;
   }
 
-  // ── Build ROI hero ──
-  const roiEl = document.getElementById('roi_hero');
+  // ── ROI hero ──
   const roiClass = combined_roi >= 0 ? 'positive' : 'negative';
   const roiDisplay = combined_roi >= 0 ? '+' + combined_roi.toFixed(1) + '%' : combined_roi.toFixed(1) + '%';
-  const paybackStr = payback ? payback + ' months' : 'Beyond 3 years';
-  const paybackDisplay = combined_roi >= 0 ? 'Breakeven in ~' + paybackStr : 'Investment phase — breakeven ' + paybackStr;
+  const paybackDisplay = payback
+    ? (combined_roi >= 0 ? 'Breakeven in ~' + payback + ' months' : 'Investment phase — breakeven in ~' + payback + ' months')
+    : 'Cash-negative through 3 years — strategic investment';
 
-  roiEl.innerHTML =
+  document.getElementById('roi_hero').innerHTML =
     '<div class="roi-label">Combined 3-Year Return on Investment</div>' +
     '<div class="roi-number ' + roiClass + '">' + roiDisplay + '</div>' +
     '<div class="roi-subtitle">' + paybackDisplay + '</div>' +
     '<div class="roi-details">' +
-      '<div class="roi-detail-item"><div class="val">' + fmtFull(total_rev) + ' EGP</div><div class="label">Total Revenue</div></div>' +
-      '<div class="roi-detail-item"><div class="val">' + fmtFull(total_investment) + ' EGP</div><div class="label">Total Investment</div></div>' +
-      '<div class="roi-detail-item"><div class="val ' + (comb_cum >= 0 ? '' : 'negative') + '" style="' + (comb_cum >= 0 ? 'color:#68d391' : 'color:#fc8181') + '">' + sign(comb_cum) + fmtFull(comb_cum) + ' EGP</div><div class="label">Net Return</div></div>' +
-      '<div class="roi-detail-item"><div class="val">' + fmtFull(comb_rev[2]) + ' EGP</div><div class="label">Run Rate (Y3)</div></div>' +
+      '<div class="roi-detail-item"><div class="val">' + fmtFull(total_rev) + ' EGP</div><div class="label">3yr Revenue</div></div>' +
+      '<div class="roi-detail-item"><div class="val">' + fmtFull(total_investment) + ' EGP</div><div class="label">3yr Investment</div></div>' +
+      '<div class="roi-detail-item"><div class="val" style="' + (comb_cum>=0?'color:#68d391':'color:#fc8181') + '">' + sign(comb_cum) + fmtFull(comb_cum) + ' EGP</div><div class="label">Net Return</div></div>' +
+      '<div class="roi-detail-item"><div class="val">' + fmtFull(comb_rev[2]) + ' EGP</div><div class="label">Y3 Run Rate</div></div>' +
     '</div>';
 
   // ── Model A summary ──
@@ -850,7 +858,7 @@ function recalc() {
     '<div class="row"><span>Y3 Net</span><span class="' + (b_net[2]>=0?'pos':'neg') + '">' + sign(b_net[2]) + fmtFull(b_net[2]) + ' EGP</span></div>' +
     '<div class="row"><span>3yr Cumulative</span><span class="' + (b_cum>=0?'pos':'neg') + '">' + sign(b_cum) + fmtFull(b_cum) + ' EGP</span></div>';
 
-  // ── Update inline tables ──
+  // ── Update inline financial tables ──
   updateCell('ma_rev1', fmtFull(a_rev[0]) + ' EGP');
   updateCell('ma_rev2', fmtFull(a_rev[1]) + ' EGP');
   updateCell('ma_rev3', fmtFull(a_rev[2]) + ' EGP');
@@ -871,7 +879,6 @@ function recalc() {
   updateCell('mb_net2', sign(b_net[1]) + fmtFull(b_net[1]) + ' EGP');
   updateCell('mb_net3', sign(b_net[2]) + fmtFull(b_net[2]) + ' EGP');
 
-  // Executive summary table
   updateCell('exec_ma_rev', (a_rev[2]/1e3).toFixed(2) + 'M EGP');
   updateCell('exec_mb_rev', (b_rev[2]/1e3).toFixed(2) + 'M EGP');
   updateCell('exec_comb_rev', (comb_rev[2]/1e3).toFixed(2) + 'M EGP');
@@ -879,12 +886,10 @@ function recalc() {
   updateCell('exec_mb_net', sign(b_net[2]) + (Math.abs(b_net[2])/1e3).toFixed(2) + 'M EGP');
   updateCell('exec_comb_net', sign(comb_net[2]) + (Math.abs(comb_net[2])/1e3).toFixed(2) + 'M EGP');
 
-  // Combined table (in executive summary)
   updateCell('comb_rev1', fmtFull(comb_rev[0]));
   updateCell('comb_rev2', fmtFull(comb_rev[1]));
   updateCell('comb_rev3', fmtFull(comb_rev[2]));
-  const cc = comb_net[0]+comb_net[1]+comb_net[2];
-  updateCell('comb_cum', sign(cc) + fmtFull(cc));
+  updateCell('comb_cum', sign(comb_cum) + fmtFull(comb_cum));
   updateCell('comb_cost1', fmtFull(comb_cost[0]));
   updateCell('comb_cost2', fmtFull(comb_cost[1]));
   updateCell('comb_cost3', fmtFull(comb_cost[2]));
@@ -903,7 +908,6 @@ function updateCell(id, val) {
   }
 }
 
-// Preset button handlers
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.preset-btn').forEach(btn => {
     btn.addEventListener('click', () => {
