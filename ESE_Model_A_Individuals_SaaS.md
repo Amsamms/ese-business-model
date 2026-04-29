@@ -167,34 +167,107 @@ Lighter than Track B.
 
 **Total Y1 certs + legal: ~400K EGP.** ISO 27001 deferred saves 300-500K.
 
-## 9. Infra + API cost modeling (self-host break-even)
+## 9. Infrastructure & Equipment — capital + operating costs
 
-**Current state:** EC2 t3.micro + KVM, Claude Haiku 4.5 API. Usage ~EGP 1,800/mo at 23-user scale.
+### Current state
+EC2 t3.micro + KVM, Claude Haiku 4.5 API. Usage ~EGP 1,800/mo at 23-user scale.
 
-**Pro user math:**
+### Pro user math
 - Heavy session: ~30K in + 3K out ≈ $0.045 per AI-unit-10K equivalent
 - Pro (500 units/mo = 5M tokens): API cost ~$25/mo = 1,300 EGP/mo per user
 - **Pro revenue:** 1,000 EGP/mo per user → GROSS MARGIN NEGATIVE at heavy usage
 
-**Mitigation:**
+### Mitigation
 - Prompt caching (Session 58 prototype, reverted — revisit)
 - Aggressive context windows
 - **Self-host migration trigger: paid users cross 100**
 
-**Self-host economics (Rev2):**
+### Cloud operating costs (included in Y1-Y3 cost table above)
 
-| Option | Capex | Opex/mo | Break-even users |
+| Phase | Provider | Monthly | Annual | Notes |
+|---|---|---|---|---|
+| Y1 | Claude Haiku API | ~$150-400 | ~80K EGP | Pay-per-token, scales with users |
+| Y2Q2+ | RunPod Qwen3-32B (2× A100) | ~$1,737 (90K EGP) | ~1.08M EGP | Flat rate regardless of usage |
+
+### Self-host hardware capital costs (one-time purchase, Egypt landed prices)
+
+All prices include 30-50% Egypt customs markup. Exchange rate: 1 USD ≈ 52 EGP (April 2026).
+
+**Tier 3 — Qwen3-32B on 4× A100 80GB (RECOMMENDED when volume justifies)**
+
+| Component | Specification | Cost (EGP) |
+|---|---|---|
+| Server chassis | Dell PowerEdge R760xa (2U rack) | included |
+| CPU | 2× Intel Xeon Gold 6438Y (32 cores each) | included |
+| RAM | 256 GB DDR5 ECC | included |
+| GPU | 4× NVIDIA A100 80GB PCIe | included |
+| Storage | 4× 1.92 TB NVMe SSD | included |
+| **Total capital cost** | | **5,200,000 – 7,280,000** |
+| Monthly operating | Colocation + electricity | ~30,000 – 40,000 |
+| Capacity | 4× Qwen3-32B instances | 80-100 concurrent users |
+| Break-even vs cloud | At ~500 users | ~5-7 years |
+
+**Tier 2 — GLM 5.1 INT4 on 8× A100 80GB**
+
+| Component | Specification | Cost (EGP) |
+|---|---|---|
+| Server chassis | Dell PowerEdge XE9680 (6U rack) | included |
+| CPU | 2× Intel Xeon Gold 6442Y (24 cores each) | included |
+| RAM | 512 GB DDR5 ECC | included |
+| GPU | 8× NVIDIA A100 80GB SXM4 NVLink | included |
+| Storage | 4× 3.84 TB NVMe SSD | included |
+| **Total capital cost** | | **10,400,000 – 14,560,000** |
+| Capacity | GLM 5.1 INT4 | 20-30 concurrent users |
+| Break-even vs cloud | | ~3-5 years |
+
+**Tier 1 — GLM 5.1 FP8 on 8× H200 141GB (best quality)**
+
+| Component | Specification | Cost (EGP) |
+|---|---|---|
+| Server chassis | Dell PowerEdge XE9680 (6U rack) | included |
+| CPU | 2× Intel Xeon Gold 6548Y+ (32 cores each) | included |
+| RAM | 1 TB DDR5 ECC | included |
+| GPU | 8× NVIDIA H200 141GB SXM5 NVLink | included |
+| Storage | 8× 3.84 TB NVMe SSD | included |
+| Network | 2× 100GbE | included |
+| PSU | 6× 3000W redundant | included |
+| **Total capital cost** | | **18,200,000 – 23,400,000** |
+| Capacity | GLM 5.1 FP8 | 30-40 concurrent users |
+| Break-even vs cloud | | ~2-3 years |
+
+### Individual GPU pricing (Egyptian market, April 2026)
+
+| GPU | VRAM | USD Each | EGP Each (landed) | Source |
+|---|---|---|---|---|
+| NVIDIA A100 80GB PCIe | 80 GB | $15K–$17K | ~1,135,000 | ServerBasket Egypt |
+| NVIDIA H100 80GB SXM5 | 80 GB | $35K–$40K | ~1.8M–2.1M | OEM (in-server) |
+| NVIDIA H200 141GB SXM5 | 141 GB | $35K–$45K | ~1.8M–2.3M | OEM (in-server) |
+| NVIDIA RTX 4090 24GB | 24 GB | $2.1K–$3K | 110K–155K | Baraka / Compumarts |
+| NVIDIA RTX 5090 32GB | 32 GB | $3K–$3.85K | 157K–200K | Compumarts / Baraka |
+| Dell PowerEdge T560 | server | — | ~120K–180K | Elite Technology |
+
+### Egyptian vendors (authorized partners)
+- **Caironix Egypt** — Dell, Supermicro, NVIDIA, HP (caironix.com)
+- **Elite Technology Egypt** — Dell, NVIDIA, HP (elite.com.eg)
+- **ServerBasket Egypt** — Dell, HP, NVIDIA, Supermicro (serverbasket.net/eg)
+- **Lenovo Egypt** — Lenovo ThinkSystem (lenovo.com/eg)
+- **Compumarts Egypt** — consumer GPUs (compumarts.com)
+- **Baraka Computer Store** — consumer GPUs (barakacomputer.net)
+
+### Cloud vs. buy break-even
+
+| Configuration | Cloud (RunPod/yr) | Buy Hardware | Break-even |
 |---|---|---|---|
-| Claude API continues | 0 | ~90K EGP at 100 Pros | Unprofitable past 100 |
-| **RunPod Qwen3-32B 2×A100 (cloud)** — recommended switchover | 0 | ~90K EGP ($1,737) flat regardless | ~100 Pros matches Claude, SCALES to 500+ flat |
-| Self-hosted Qwen3-32B 2×A100 Egypt (Tier 3) | 5-7M EGP | ~30-40K/mo | ~300 Pros to amortize |
+| 2× A100 (Qwen3-32B) | ~1.08M EGP/yr | 5.2–7.3M EGP | **5–7 years** → cloud wins |
+| 8× A100 (GLM 5.1 INT4) | ~4.34M EGP/yr | 10.4–14.6M EGP | **3–5 years** |
+| 8× H100 (GLM 5.1 FP8) | ~11.99M EGP/yr | 25.5–32.8M EGP | **2–3 years** → buy wins |
 
-**Recommendation:**
-- Y1: Claude API + caching, ~30K/mo at 150 users
-- **Y2Q2 (~300 users): migrate to RunPod Qwen3-32B** at 90K/mo → caps risk, improves margin
-- Y3: evaluate on-prem if Model B/C/D budget justifies
-
-**Switching cost:** 2-3 Claude Code sessions of infra work + prompt recalibration (Haiku → Qwen3).
+### Recommendation
+- **Y1:** Claude API + caching, ~30K/mo at 150 users. Zero capital cost.
+- **Y2Q2 (~300 users):** Migrate to RunPod Qwen3-32B at 90K/mo. Still zero capital. Caps cost risk, improves margin.
+- **Y3:** Evaluate self-host purchase only if Model B/C/D budget justifies. Hardware gets cheaper each year (AI depreciation thesis).
+- **Capital cost note:** Tier 3 self-host hardware (5-7M EGP) is a single Board-level decision. Not required before Y3.
+- **Switching cost:** 2-3 Claude Code sessions of infra work + prompt recalibration (Haiku → Qwen3).
 
 ## 10. Quarterly milestones
 

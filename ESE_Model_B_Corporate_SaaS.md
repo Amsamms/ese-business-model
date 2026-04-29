@@ -214,24 +214,93 @@ At this price point, ISO 27001 is overkill. Focus on legally-operational essenti
 
 **Why no subsidiary Y1?** At 1.8M/yr TAM, a separate legal entity with 500K/yr overhead burns 28% of revenue on admin. Run ESE as a business line within EPROM with separate P&L tracking until Y3+.
 
-## 9. Infrastructure — cloud-first, no hardware
+## 9. Infrastructure — cloud-first, hardware reference included
 
-**NO self-hosted GPU server in Y1-Y3.** The TAM doesn't justify it. Instead:
+**Strategy: Cloud-first in Y1-Y3. NO self-hosted GPU purchase.** The TAM (1.8M EGP/yr) doesn't justify it. But when management asks "what WOULD hardware cost?", this section answers with real numbers.
 
-| Phase | AI Backend | Cost | When |
-|---|---|---|---|
-| **Current** | Claude Haiku 4.5 API | ~$35/mo (23 users) | Now |
-| **Model B Y1** | Claude API, prompt caching | ~$200-400/mo (3 companies, ~30 users) | Y1 |
-| **Model B Y2** | Claude API or RunPod Qwen3-32B | ~$800-1,500/mo (7 companies, ~70 users) | Cut over when API bill > RunPod cost |
-| **Model B Y3+** | RunPod or self-host only if Model C justifies | ~$2,000-3,000/mo | Re-evaluate |
+### AI Backend Phases
 
-**The math:**
-- Self-hosted GPU server (Dell R760xa + 2× A100): ~5.7M EGP one-time + ~30K/mo colocation
-- That's 47 YEARS of Claude API at current spend levels
-- Or 5+ years even at Y3 volume
-- **Self-host only makes sense at Model C scale (8M+ per deal, customer pays hardware)**
+| Phase | AI Backend | Monthly Cost | Annual | When |
+|---|---|---|---|---|
+| **Current** | Claude Haiku 4.5 API | ~$35 (1,820 EGP) | ~22K EGP | Now (23 users) |
+| **Model B Y1** | Claude API, prompt caching | ~$200-400 (10-21K EGP) | ~120-250K EGP | Y1 (3 companies, ~30 users) |
+| **Model B Y2** | Claude API or RunPod Qwen3-32B | ~$800-1,500 (42-78K EGP) | ~500-940K EGP | Y2 (7 companies, ~70 users) |
+| **Model B Y3** | RunPod Qwen3-32B or self-host IF Model C justifies | ~$2,000-3,000 (104-156K EGP) | ~1.2-1.9M EGP | Re-evaluate Y2Q4 |
+
+### Why cloud-first for Model B
+
+| Reason | Detail |
+|---|---|
+| **TAM too small** | 1.8M EGP/yr steady state does NOT amortize 5-7M EGP hardware |
+| **Payback math** | 5.7M ÷ 1.8M = **3.2+ years** just to recover hardware cost — before team, marketing, or any other costs |
+| **Risk** | Self-host is a fixed sunk cost. Cloud scales down if pilots don't convert |
+| **Trigger** | Self-host only when Model C (on-prem at 8-18M per deal) places hardware on customer budget |
+
+### Self-host hardware capital costs (REFERENCE — when management asks "what if?")
+
+All prices Egypt landed (30-50% customs markup). 1 USD ≈ 52 EGP (April 2026). For detailed component breakdown see Model A Section 9.
+
+**Tier 3 — Qwen3-32B on 4× A100 80GB (entry self-host)**
+
+| Component | Cost (EGP) |
+|---|---|
+| Dell PowerEdge R760xa + 2× Xeon Gold 6438Y + 256 GB DDR5 + 4× A100 80GB + 4×1.92TB NVMe | 5,200,000 – 7,280,000 |
+| Monthly colocation + electricity | 30,000 – 40,000 |
+| Capacity | 80-100 concurrent users |
+| Break-even vs cloud (RunPod at ~90K/mo) | **5-7 years** — cloud wins |
+
+**Tier 2 — GLM 5.1 INT4 on 8× A100 80GB (mid-tier)**
+
+| Component | Cost (EGP) |
+|---|---|
+| Dell PowerEdge XE9680 + 2× Xeon Gold 6442Y + 512 GB DDR5 + 8× A100 80GB SXM4 + 4×3.84TB NVMe | 10,400,000 – 14,560,000 |
+| Capacity | GLM 5.1 INT4, 20-30 concurrent |
+| Break-even vs cloud | **3-5 years** |
+
+**Tier 1 — GLM 5.1 FP8 on 8× H200 141GB (best quality)**
+
+| Component | Cost (EGP) |
+|---|---|
+| Dell PowerEdge XE9680 + 2× Xeon Gold 6548Y+ + 1 TB DDR5 + 8× H200 141GB SXM5 + 8×3.84TB NVMe + 2×100GbE | 18,200,000 – 23,400,000 |
+| Capacity | GLM 5.1 FP8, 30-40 concurrent |
+| Break-even vs cloud | **2-3 years** |
+
+### Individual GPU pricing (Egyptian market, April 2026)
+
+| GPU | VRAM | USD | EGP Landed | Source |
+|---|---|---|---|---|
+| NVIDIA A100 80GB PCIe | 80 GB | $15K-17K | ~1,135,000 | ServerBasket Egypt |
+| NVIDIA H100 80GB SXM5 | 80 GB | $35K-40K | ~1.8M-2.1M | OEM (in-server) |
+| NVIDIA H200 141GB SXM5 | 141 GB | $35K-45K | ~1.8M-2.3M | OEM (in-server) |
+| NVIDIA RTX 4090 24GB | 24 GB | $2.1K-3K | 110K-155K | Baraka / Compumarts |
+| NVIDIA RTX 5090 32GB | 32 GB | $3K-3.85K | 157K-200K | Compumarts / Baraka |
+
+### Egyptian hardware vendors
+
+- **Caironix Egypt** — Dell, Supermicro, NVIDIA, HP (caironix.com)
+- **Elite Technology Egypt** — Dell, NVIDIA, HP (elite.com.eg)
+- **ServerBasket Egypt** — Dell, HP, NVIDIA, Supermicro (serverbasket.net/eg)
+- **Lenovo Egypt** — Lenovo ThinkSystem (lenovo.com/eg)
+- **Compumarts Egypt** — consumer GPUs (compumarts.com)
+- **Baraka Computer Store** — consumer GPUs (barakacomputer.net)
+
+### Cloud vs. buy break-even summary
+
+| Config | Cloud/yr (RunPod) | Buy (EGP landed) | Break-even | Verdict |
+|---|---|---|---|---|
+| 2× A100 (Qwen3-32B) | ~1.08M EGP | 5.2-7.3M | **5-7 yr** | Cloud wins for Model B |
+| 8× A100 (GLM 5.1 INT4) | ~4.34M EGP | 10.4-14.6M | **3-5 yr** | Cloud still wins |
+| 8× H200 (GLM 5.1 FP8) | ~11.99M EGP | 18.2-23.4M | **2-3 yr** | Buy only at Model C scale |
+
+### Recommendation (unchanged)
+
+- **Y1-Y3:** Claude API → RunPod. Zero hardware capital. Variable cost scales with revenue.
+- **Y4+:** Re-evaluate ONLY if Model C has placed on-prem hardware at ≥3 customer sites, creating a shared-infrastructure case. Hardware will be 30-50% cheaper by then (AI depreciation thesis).
+- **Self-host only at Model C scale** (8M+ per deal, customer pays hardware). Model B's 1.8M/yr TAM does NOT carry a 5-7M EGP capital purchase.
+- **Switching cost:** 2-3 Claude Code sessions to migrate from Claude API to RunPod Qwen3-32B (prompt recalibration only, no code changes).
 
 ### Deployment
+
 - Existing EC2/KVM infrastructure (portal, heater, pump, optimizer containers)
 - Multi-tenant: separate DB schemas per customer (PostgreSQL), tenant_id on all tables
 - No VPN/MPLS at this price point — standard HTTPS + JWT auth
