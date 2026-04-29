@@ -7,414 +7,321 @@
 <meta name="description" content="Two-track business model for ESE — the AI copilot for petroleum engineers. Individual SaaS + Corporate SaaS for EGPC refineries. By EPROM.">
 <style>
   :root {
-    --navy: #0a1628;
-    --blue: #1a3a5c;
-    --gold: #c8960c;
-    --light: #f4f6f9;
-    --white: #ffffff;
-    --text: #2d3748;
-    --muted: #718096;
-    --border: #e2e8f0;
-    --green: #38a169;
-    --red: #e53e3e;
-    --amber: #d69e2e;
+    --navy: #0a1628; --blue: #1a3a5c; --gold: #c8960c;
+    --light: #f4f6f9; --white: #ffffff; --text: #2d3748;
+    --muted: #718096; --border: #e2e8f0; --green: #38a169; --red: #e53e3e;
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    color: var(--text);
-    background: var(--light);
-    line-height: 1.6;
-    font-size: 16px;
+    color: var(--text); background: var(--light); line-height: 1.6; font-size: 16px;
   }
-
   /* ── Hero ── */
   .hero {
     background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
-    color: var(--white);
-    padding: clamp(40px, 8vw, 70px) 20px clamp(40px, 8vw, 50px);
-    text-align: center;
+    color: var(--white); padding: clamp(36px, 7vw, 60px) 20px; text-align: center;
   }
-  .hero h1 { font-size: clamp(1.6rem, 5vw, 2.8rem); font-weight: 700; margin-bottom: 10px; }
-  .hero p { font-size: clamp(0.95rem, 2vw, 1.15rem); opacity: 0.85; max-width: 680px; margin: 0 auto 18px; }
-  .hero .badge { display: inline-block; padding: 5px 16px; border: 1px solid var(--gold); color: var(--gold); border-radius: 20px; font-size: 0.85rem; letter-spacing: 0.5px; }
+  .hero h1 { font-size: clamp(1.5rem, 5vw, 2.6rem); font-weight: 700; margin-bottom: 8px; }
+  .hero .subtitle { font-size: clamp(0.9rem, 2vw, 1.1rem); opacity: 0.85; max-width: 640px; margin: 0 auto 14px; }
+  .hero .badge { display: inline-block; padding: 5px 16px; border: 1px solid var(--gold); color: var(--gold); border-radius: 20px; font-size: 0.82rem; letter-spacing: 0.5px; }
 
   /* ── Container ── */
   .container { max-width: 960px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); }
 
   /* ── Sections ── */
-  section { padding: clamp(36px, 6vw, 56px) 0; }
+  section { padding: clamp(32px, 5vw, 50px) 0; }
   section:nth-child(even) { background: var(--white); }
   section h2 {
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
-    color: var(--navy);
-    margin-bottom: 6px;
-    padding-bottom: 12px;
-    border-bottom: 3px solid var(--gold);
+    font-size: clamp(1.25rem, 3vw, 1.7rem); color: var(--navy);
+    margin-bottom: 4px; padding-bottom: 10px; border-bottom: 3px solid var(--gold);
     display: inline-block;
   }
-  section h3 { font-size: 1.1rem; color: var(--blue); margin: 28px 0 10px; }
-  section .section-intro { color: var(--muted); margin-bottom: 20px; max-width: 720px; }
+  .intro { color: var(--muted); margin-bottom: 18px; max-width: 700px; font-size: 0.95rem; }
 
   /* ── Cards ── */
-  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 18px; margin-top: 20px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px,100%), 1fr)); gap: 16px; margin-top: 16px; }
   .card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 22px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    background: var(--white); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
   }
-  .card h4 { color: var(--navy); margin-bottom: 6px; font-size: 1.05rem; }
-  .card .price { font-size: 1.5rem; font-weight: 700; color: var(--blue); margin: 6px 0; }
-  .card .price small { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
-  .card ul { list-style: none; margin-top: 8px; }
-  .card ul li { padding: 3px 0; font-size: 0.88rem; color: var(--muted); }
+  .card h4 { color: var(--navy); margin-bottom: 4px; font-size: 1rem; }
+  .card .price { font-size: 1.4rem; font-weight: 700; color: var(--blue); margin: 4px 0; }
+  .card .price small { font-size: 0.78rem; color: var(--muted); font-weight: 400; }
+  .card ul { list-style: none; margin-top: 6px; }
+  .card ul li { padding: 2px 0; font-size: 0.85rem; color: var(--muted); }
   .card ul li::before { content: '✓ '; color: var(--green); font-weight: 700; }
 
   /* ── Tables ── */
-  .table-wrap { overflow-x: auto; margin: 16px 0; -webkit-overflow-scrolling: touch; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 500px; }
-  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
-  th { background: var(--navy); color: var(--white); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+  .table-wrap { overflow-x: auto; margin: 14px 0; -webkit-overflow-scrolling: touch; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.86rem; min-width: 500px; }
+  th, td { padding: 9px 11px; text-align: left; border-bottom: 1px solid var(--border); }
+  th { background: var(--navy); color: var(--white); font-weight: 600; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
   tr:hover td { background: #f7fafc; }
 
   /* ── Highlight ── */
   .highlight {
     background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-    border-left: 4px solid var(--gold);
-    padding: 18px 20px;
-    border-radius: 0 8px 8px 0;
-    margin: 16px 0;
-    font-size: 0.95rem;
+    border-left: 4px solid var(--gold); padding: 16px 18px;
+    border-radius: 0 8px 8px 0; margin: 14px 0; font-size: 0.93rem;
   }
   .highlight strong { color: var(--navy); }
 
   /* ── Two column ── */
-  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   @media (max-width: 680px) { .two-col { grid-template-columns: 1fr; } }
 
+  /* ── Big stat cards ── */
+  .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(160px,100%), 1fr)); gap: 14px; margin: 16px 0; }
+  .stat-card { text-align: center; padding: 18px 12px; background: var(--white); border-radius: 10px; border: 1px solid var(--border); }
+  .stat-card .big { font-size: 1.6rem; font-weight: 700; color: var(--navy); }
+  .stat-card .big.green { color: var(--green); }
+  .stat-card .big.red { color: var(--red); }
+  .stat-card .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
   /* ═══════════════════════════════════════════
-     CALCULATOR — core redesign
+     COSTS SECTION
      ═══════════════════════════════════════════ */
+  .cost-bars { margin-top: 12px; }
+  .cost-bar-row { margin-bottom: 8px; }
+  .cost-bar-row .cost-label { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 2px; }
+  .cost-bar-row .cost-label strong { color: var(--text); }
+  .cost-bar-row .cost-label span { color: var(--muted); }
+  .cost-bar { height: 22px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .cost-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
+  .cost-bar-fill.team { background: var(--navy); }
+  .cost-bar-fill.marketing { background: var(--blue); }
+  .cost-bar-fill.infra { background: #2b6cb0; }
+  .cost-bar-fill.legal { background: #3182ce; }
+  .cost-bar-fill.other { background: #63b3ed; }
+  .cost-total { text-align: right; font-weight: 700; margin-top: 8px; font-size: 0.95rem; color: var(--navy); }
 
-  .calc-wrap {
-    background: var(--white);
-    border: 2px solid var(--border);
-    border-radius: 14px;
-    overflow: hidden;
-    margin: 20px 0;
-  }
+  /* ═══════════════════════════════════════════
+     CALCULATOR
+     ═══════════════════════════════════════════ */
+  .calc-wrap { background: var(--white); border: 2px solid var(--border); border-radius: 14px; overflow: hidden; margin: 18px 0; }
 
-  /* How-to banner */
+  /* How-to */
   .calc-howto {
-    background: var(--light);
-    padding: 14px 20px;
-    font-size: 0.85rem;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 16px;
+    background: var(--light); padding: 12px 18px; font-size: 0.83rem;
+    color: var(--muted); border-bottom: 1px solid var(--border);
   }
-  .calc-howto span { font-weight: 600; color: var(--navy); }
-  .calc-howto .step { display: inline-flex; align-items: center; gap: 4px; }
+  .calc-howto strong { color: var(--navy); }
 
-  /* ROI hero card */
-  .roi-hero {
-    padding: clamp(20px, 4vw, 32px) 24px;
-    text-align: center;
-    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
-    color: var(--white);
+  /* PAYBACK HERO */
+  .payback-hero {
+    padding: clamp(18px, 3vw, 28px) 20px; text-align: center;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%); color: var(--white);
   }
-  .roi-hero .roi-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.7; margin-bottom: 4px; }
-  .roi-hero .roi-number {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 4px;
+  .payback-hero .question { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 6px; }
+  .payback-hero .answer {
+    font-size: clamp(2rem, 7vw, 3.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 4px;
   }
-  .roi-hero .roi-number.positive { color: #68d391; }
-  .roi-hero .roi-number.negative { color: #fc8181; }
-  .roi-hero .roi-subtitle { font-size: 0.9rem; opacity: 0.75; }
-  .roi-details {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px solid rgba(255,255,255,0.15);
+  .payback-hero .answer.good { color: #68d391; }
+  .payback-hero .answer.bad { color: #fc8181; }
+  .payback-hero .context { font-size: 0.88rem; opacity: 0.75; max-width: 550px; margin: 0 auto; }
+  .payback-details {
+    display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;
+    margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.15);
   }
-  .roi-detail-item { text-align: center; }
-  .roi-detail-item .val { font-size: 1.3rem; font-weight: 700; }
-  .roi-detail-item .label { font-size: 0.75rem; opacity: 0.65; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .pd-item { text-align: center; flex: 1; min-width: 130px; }
+  .pd-item .val { font-size: 1.2rem; font-weight: 700; }
+  .pd-item .lbl { font-size: 0.72rem; opacity: 0.6; margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
 
-  /* Scenario presets */
+  /* Presets */
   .presets {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    background: var(--light);
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+    padding: 14px 18px; border-bottom: 1px solid var(--border); background: var(--light);
   }
   .preset-btn {
-    padding: 9px 20px;
-    border: 2px solid var(--border);
-    border-radius: 8px;
-    background: var(--white);
-    font-size: 0.85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--text);
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
+    padding: 8px 16px; border: 2px solid var(--border); border-radius: 8px;
+    background: var(--white); font-size: 0.83rem; font-weight: 600; cursor: pointer;
+    transition: all 0.15s; color: var(--text); min-height: 44px;
+    display: inline-flex; align-items: center; gap: 6px;
+    -webkit-tap-highlight-color: transparent; touch-action: manipulation;
   }
   .preset-btn:hover { border-color: var(--blue); }
   .preset-btn.active { background: var(--navy); color: var(--white); border-color: var(--navy); }
-  .preset-btn .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
-  .preset-btn .dot.conservative { background: #fc8181; }
-  .preset-btn .dot.base { background: var(--amber); }
-  .preset-btn .dot.aggressive { background: #68d391; }
+  .preset-btn .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .preset-btn .dot.low { background: #fc8181; }
+  .preset-btn .dot.mid { background: #f6ad55; }
+  .preset-btn .dot.high { background: #68d391; }
 
-  /* Sliders area */
-  .sliders-area { padding: 20px; }
-  .sliders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 28px; }
+  /* Sliders */
+  .sliders-area { padding: 18px; }
+  .sliders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 26px; }
   @media (max-width: 680px) { .sliders-grid { grid-template-columns: 1fr; } }
-
-  .slider-col h4 {
-    color: var(--blue);
-    font-size: 0.95rem;
-    margin: 0 0 4px 0;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border);
+  .slider-col h4 { color: var(--blue); font-size: 0.93rem; margin: 0 0 4px 0; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+  .slider-col .col-desc { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
+  .slider-group { margin-bottom: 14px; }
+  .slider-group .sh { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+  .slider-group .sh .sl { font-size: 0.85rem; font-weight: 600; }
+  .slider-group .sh .sv {
+    font-weight: 700; font-size: 0.95rem; color: var(--blue);
+    background: var(--light); padding: 2px 10px; border-radius: 5px; min-width: 72px; text-align: center;
   }
-  .slider-col .col-desc {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 14px;
-    line-height: 1.4;
-  }
-  .slider-group { margin-bottom: 16px; }
-  .slider-group .slider-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 3px;
-  }
-  .slider-group .slider-label {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text);
-  }
-  .slider-group .slider-value {
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--blue);
-    background: var(--light);
-    padding: 2px 12px;
-    border-radius: 6px;
-    min-width: 80px;
-    text-align: center;
-    white-space: nowrap;
-  }
-  .slider-group .slider-hint {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-bottom: 6px;
-    line-height: 1.35;
-  }
+  .slider-group .hint { font-size: 0.77rem; color: var(--muted); margin-bottom: 5px; }
   .slider-group input[type=range] {
-    width: 100%;
-    height: 28px;
-    -webkit-appearance: none;
-    appearance: none;
-    background: transparent;
-    cursor: pointer;
-    touch-action: manipulation;
+    width: 100%; height: 26px; -webkit-appearance: none; appearance: none;
+    background: transparent; cursor: pointer; touch-action: manipulation;
   }
-  .slider-group input[type=range]::-webkit-slider-runnable-track {
-    height: 8px;
-    background: var(--border);
-    border-radius: 4px;
-  }
+  .slider-group input[type=range]::-webkit-slider-runnable-track { height: 7px; background: var(--border); border-radius: 4px; }
   .slider-group input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 36px;
-    height: 36px;
-    background: var(--navy);
-    border: 3px solid var(--white);
-    border-radius: 50%;
-    margin-top: -14px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    cursor: pointer;
+    -webkit-appearance: none; appearance: none; width: 34px; height: 34px;
+    background: var(--navy); border: 3px solid var(--white); border-radius: 50%;
+    margin-top: -14px; box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer;
   }
-  .slider-group input[type=range]::-moz-range-track {
-    height: 8px;
-    background: var(--border);
-    border-radius: 4px;
-  }
+  .slider-group input[type=range]::-moz-range-track { height: 7px; background: var(--border); border-radius: 4px; }
   .slider-group input[type=range]::-moz-range-thumb {
-    width: 32px;
-    height: 32px;
-    background: var(--navy);
-    border: 3px solid var(--white);
-    border-radius: 50%;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    width: 32px; height: 32px; background: var(--navy);
+    border: 3px solid var(--white); border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   }
 
-  /* Model summary cards within calculator */
-  .calc-summaries {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    padding: 0 20px 20px;
-  }
-  @media (max-width: 680px) { .calc-summaries { grid-template-columns: 1fr; } }
-  .calc-summary {
-    background: var(--light);
-    border-radius: 10px;
-    padding: 18px;
-    font-size: 0.85rem;
-  }
-  .calc-summary h5 { color: var(--navy); margin-bottom: 8px; font-size: 0.9rem; }
-  .calc-summary .row { display: flex; justify-content: space-between; padding: 3px 0; border-bottom: 1px dotted var(--border); }
+  /* Per-model summaries */
+  .calc-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; padding: 0 18px 18px; }
+  @media (max-width: 680px) { .calc-bottom { grid-template-columns: 1fr; } }
+  .calc-summary { background: var(--light); border-radius: 8px; padding: 16px; font-size: 0.84rem; }
+  .calc-summary h5 { color: var(--navy); margin-bottom: 6px; }
+  .calc-summary .row { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px dotted var(--border); }
   .calc-summary .row:last-child { border-bottom: none; }
   .calc-summary .row .pos { color: var(--green); font-weight: 600; }
   .calc-summary .row .neg { color: var(--red); font-weight: 600; }
 
   /* ── Feedback loop ── */
   .feedback-loop {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
-    gap: 14px;
-    margin-top: 14px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(min(140px,100%), 1fr));
+    gap: 12px; margin-top: 12px;
   }
-  .feedback-step {
-    text-align: center;
-    padding: 16px 10px;
-    background: var(--white);
-    border-radius: 8px;
-    border: 1px solid var(--border);
-  }
-  .feedback-step .step-num {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px; height: 30px;
-    background: var(--navy);
-    color: var(--white);
-    border-radius: 50%;
-    font-weight: 700;
-    font-size: 0.85rem;
-    margin-bottom: 8px;
-  }
-  .feedback-step strong { display: block; margin-bottom: 3px; font-size: 0.9rem; }
-  .feedback-step p { font-size: 0.8rem; color: var(--muted); margin: 0; }
+  .feedback-step { text-align: center; padding: 14px 8px; background: var(--white); border-radius: 8px; border: 1px solid var(--border); }
+  .feedback-step .n { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--navy); color: var(--white); border-radius: 50%; font-weight: 700; font-size: 0.82rem; margin-bottom: 6px; }
+  .feedback-step strong { display: block; margin-bottom: 2px; font-size: 0.85rem; }
+  .feedback-step p { font-size: 0.78rem; color: var(--muted); margin: 0; }
 
   /* ── Downloads ── */
-  .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap: 14px; margin-top: 18px; }
+  .downloads { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(170px,100%), 1fr)); gap: 12px; margin-top: 16px; }
   .dl-card {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--white); border: 2px solid var(--border); border-radius: 10px;
-    padding: 18px; text-decoration: none; color: var(--text);
-    transition: all 0.2s;
+    display: flex; align-items: center; gap: 10px; background: var(--white);
+    border: 2px solid var(--border); border-radius: 10px; padding: 16px;
+    text-decoration: none; color: var(--text); transition: all 0.2s; min-height: 50px;
     -webkit-tap-highlight-color: transparent;
-    min-height: 52px;
   }
   .dl-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
-  .dl-card:active { transform: translateY(0); }
-  .dl-icon { font-size: 1.8rem; flex-shrink: 0; }
-  .dl-info strong { display: block; color: var(--navy); font-size: 0.9rem; }
-  .dl-info span { font-size: 0.78rem; color: var(--muted); }
+  .dl-icon { font-size: 1.7rem; flex-shrink: 0; }
+  .dl-info strong { display: block; color: var(--navy); font-size: 0.88rem; }
+  .dl-info span { font-size: 0.76rem; color: var(--muted); }
 
   /* ── Footer ── */
-  footer {
-    background: var(--navy); color: rgba(255,255,255,0.7);
-    text-align: center; padding: 28px 20px; font-size: 0.85rem;
-  }
+  footer { background: var(--navy); color: rgba(255,255,255,0.7); text-align: center; padding: 26px 20px; font-size: 0.83rem; }
   footer a { color: var(--gold); text-decoration: none; }
 
-  /* Flash animation on value change */
+  /* Flash */
   .live-val { transition: background 0.2s; }
   .live-val.flash { background: #fef3c7; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     HERO
-     ═══════════════════════════════════════════ -->
+<!-- ═══════════════ HERO ═══════════════ -->
 <header class="hero">
   <h1>ESE Business Model</h1>
-  <p>Two-track strategy for EPROM Smart Engineering — the AI copilot for petroleum engineers.<br>Individual SaaS to build product-market fit. Corporate SaaS to land inside Egypt's refineries.</p>
-  <span class="badge">April 2026 · v2 · Egyptian Economic Reality</span>
+  <p class="subtitle">ESE is an AI copilot for petroleum engineers — built by EPROM, tested at EGYPS 2026, now becoming a real business. This page explains how it makes money, what it costs, and when the investment pays back.</p>
+  <span class="badge">April 2026 · v2</span>
 </header>
 
-<!-- ═══════════════════════════════════════════
-     EXECUTIVE SUMMARY
-     ═══════════════════════════════════════════ -->
+<!-- ═══════════════ HOW ESE MAKES MONEY ═══════════════ -->
 <section>
   <div class="container">
-    <h2>Executive Summary</h2>
-    <p class="section-intro">ESE is an AI-powered engineering copilot for petroleum process engineers, built by EPROM. It needs a business model that reflects Egypt's economic reality — EGP devaluation, tight refinery budgets, and procurement constraints.</p>
+    <h2>How ESE Makes Money</h2>
+    <p class="intro">Two simple tracks. One sells to people. One sells to companies. Together they build the case for bigger deals later.</p>
 
-    <div class="highlight">
-      <strong>Two tracks, one goal.</strong> Model A sells directly to individual engineers at consumer prices — building cash flow, user feedback, and a community of practice. Model B sells to EGPC refineries at prices they can actually approve — proving the product inside real operating plants. Together they lay the foundation for high-ticket Model C/D deals from Year 4 onward.
+    <div class="two-col">
+      <div class="card">
+        <h4>Track A — Sell to Engineers</h4>
+        <p style="font-size:0.88rem;color:var(--muted);margin:8px 0">Individual petroleum engineers buy a subscription, like Netflix or ChatGPT. They get an AI assistant that helps them do their job faster — calculate heaters, pumps, flares, and more.</p>
+        <p style="font-size:0.85rem"><strong>Price:</strong> 600 to 48,000 EGP per year depending on tier</p>
+        <p style="font-size:0.85rem"><strong>Target:</strong> 2,400 paying users by Year 3</p>
+        <p style="font-size:0.85rem"><strong>Why:</strong> Generates cash and proves engineers actually want this</p>
+      </div>
+      <div class="card">
+        <h4>Track B — Sell to Refineries</h4>
+        <p style="font-size:0.88rem;color:var(--muted);margin:8px 0">EGPC subsidiary refineries buy a company license for their engineering teams. They get the same AI tools plus their own manuals and procedures loaded in.</p>
+        <p style="font-size:0.85rem"><strong>Price:</strong> 100,000 or 200,000 EGP per year per refinery</p>
+        <p style="font-size:0.85rem"><strong>Target:</strong> 10 EGPC refineries by Year 3</p>
+        <p style="font-size:0.85rem"><strong>Why:</strong> Builds the reference list needed for high-ticket deals later</p>
+      </div>
     </div>
 
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th></th><th>Model A (Individuals)</th><th>Model B (Corporate)</th><th>Combined</th></tr></thead>
-        <tbody>
-          <tr><td><strong>What we sell</strong></td><td>AI copilot subscriptions</td><td>Refinery SaaS seats</td><td>—</td></tr>
-          <tr><td><strong>Price point</strong></td><td>600 – 120K EGP/yr</td><td>100K – 200K EGP/yr</td><td>—</td></tr>
-          <tr><td><strong>Target</strong></td><td>Engineers & small firms</td><td>10 EGPC refineries</td><td>—</td></tr>
-          <tr><td><strong>Y3 Revenue</strong></td><td><span class="live-val" id="exec_ma_rev">8.8M</span> EGP</td><td><span class="live-val" id="exec_mb_rev">2.25M</span> EGP</td><td><span class="live-val" id="exec_comb_rev">11.05M</span> EGP</td></tr>
-          <tr><td><strong>Y3 Net</strong></td><td><span class="live-val" id="exec_ma_net">+3.48M</span> EGP</td><td><span class="live-val" id="exec_mb_net">-1.44M</span> EGP</td><td><span class="live-val" id="exec_comb_net">+2.04M</span> EGP</td></tr>
-          <tr><td><strong>Strategic role</strong></td><td>Cash flow + user proof</td><td>Refinery references</td><td>Model C pipeline</td></tr>
-        </tbody>
-      </table>
+    <div class="highlight" style="margin-top:16px">
+      <strong>The real payoff is Year 4 and beyond.</strong> Once 10 EGPC refineries use ESE, EPROM can sell bigger on-premise systems (Model C) at 5–18 million EGP each. The first 3 years are about building the proof.
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     INTERACTIVE CALCULATOR
-     ═══════════════════════════════════════════ -->
+<!-- ═══════════════ WHERE THE MONEY GOES ═══════════════ -->
+<section>
+  <div class="container">
+    <h2>Where the Money Goes</h2>
+    <p class="intro">Over 3 years, the combined investment across both tracks totals <strong><span class="live-val" id="cost_total_3yr">20.5M</span> EGP</strong>. Here is where every pound goes.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="cost-bars" id="cost_bars">
+          <!-- filled by JS -->
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.85rem;color:var(--muted);line-height:1.7">
+          <p><strong style="color:var(--navy)">People (Team)</strong> — Engineers, sales, marketing, support. Salaries for the people building and selling ESE. The largest cost by far.</p>
+          <p><strong style="color:var(--navy)">Marketing</strong> — LinkedIn ads, conference booths, YouTube content, magazine ads, university programs. Everything spent to find customers.</p>
+          <p><strong style="color:var(--navy)">Infrastructure</strong> — Cloud servers (AWS EC2), AI API costs (Claude, then self-hosted Qwen3). The computers that run ESE.</p>
+          <p><strong style="color:var(--navy)">Legal & Certifications</strong> — EULA, privacy policy, trademarks, ITIDA registration. Everything needed to legally sell software.</p>
+          <p><strong style="color:var(--navy)">Other</strong> — Payment gateway fees, support tools, contingency buffer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="stat-row" style="margin-top:16px">
+      <div class="stat-card">
+        <div class="big"><span class="live-val" id="cost_team_pct">58</span>%</div>
+        <div class="lbl">goes to people</div>
+      </div>
+      <div class="stat-card">
+        <div class="big"><span class="live-val" id="cost_mkt_pct">12</span>%</div>
+        <div class="lbl">goes to marketing</div>
+      </div>
+      <div class="stat-card">
+        <div class="big"><span class="live-val" id="cost_infra_pct">10</span>%</div>
+        <div class="lbl">goes to infrastructure</div>
+      </div>
+      <div class="stat-card">
+        <div class="big"><span class="live-val" id="cost_legal_pct">7</span>%</div>
+        <div class="lbl">goes to legal & certs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ WHEN DO WE GET THE MONEY BACK? ═══════════════ -->
 <section id="calculator">
   <div class="container">
-    <h2>Return on Investment</h2>
-    <p class="section-intro">One number that sums it up: <strong>for every 100 EGP we spend across both tracks, how many EGP come back in 3 years?</strong> Drag the sliders below to explore different scenarios. The ROI updates instantly.</p>
+    <h2>When Do We Get the Money Back?</h2>
+    <p class="intro">This is the question that matters. <strong>How long until the revenue covers what we spent?</strong> Drag the sliders to explore what happens if we grow faster, charge more, or sign more refineries. Everything updates instantly.</p>
 
     <div class="calc-wrap">
 
-      <!-- How to use -->
+      <!-- How-to -->
       <div class="calc-howto">
-        <span>How to use this:</span>
-        <span class="step">① Pick a preset scenario below</span>
-        <span class="step">② Drag any slider to fine-tune</span>
-        <span class="step">③ Watch the ROI number update</span>
+        <strong>Try this:</strong> Click one of the three scenario buttons below, then drag any slider to fine-tune. The answer updates immediately.
       </div>
 
-      <!-- BIG ROI HERO -->
-      <div class="roi-hero" id="roi_hero">
-        <!-- filled by JS -->
-      </div>
+      <!-- PAYBACK ANSWER -->
+      <div class="payback-hero" id="payback_hero"><!-- filled by JS --></div>
 
-      <!-- SCENARIO PRESETS -->
+      <!-- PRESETS -->
       <div class="presets">
-        <button class="preset-btn" data-preset="conservative"><span class="dot conservative"></span>Conservative</button>
-        <button class="preset-btn active" data-preset="base"><span class="dot base"></span>Base Case</button>
-        <button class="preset-btn" data-preset="aggressive"><span class="dot aggressive"></span>Aggressive</button>
+        <button class="preset-btn" data-preset="conservative"><span class="dot low"></span>Slow Growth</button>
+        <button class="preset-btn active" data-preset="base"><span class="dot mid"></span>Expected</button>
+        <button class="preset-btn" data-preset="aggressive"><span class="dot high"></span>Fast Growth</button>
       </div>
 
       <!-- SLIDERS -->
@@ -422,265 +329,240 @@
         <div class="sliders-grid">
           <!-- Model A -->
           <div class="slider-col">
-            <h4>Model A — Individual SaaS</h4>
-            <p class="col-desc">ESE subscriptions sold directly to petroleum engineers and small consulting firms.</p>
+            <h4>Track A — Engineers subscribe to ESE</h4>
+            <p class="col-desc">How many individual engineers pay for ESE each year, and how much they pay on average.</p>
 
             <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Paying users by end of Year 1</span>
-                <span class="slider-value" id="a_y1_val">150</span>
-              </div>
-              <p class="slider-hint">How many engineers sign up in the first 12 months</p>
+              <div class="sh"><span class="sl">Engineers paying by end of Year 1</span><span class="sv" id="a_y1_val">150</span></div>
+              <p class="hint">After the first 12 months of marketing and word-of-mouth</p>
               <input type="range" id="a_y1" min="30" max="500" value="150" step="10" oninput="recalc()">
             </div>
 
             <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Paying users by end of Year 2</span>
-                <span class="slider-value" id="a_y2_val">900</span>
-              </div>
-              <p class="slider-hint">Growth after EGYPS 2027 and word-of-mouth</p>
+              <div class="sh"><span class="sl">Engineers paying by end of Year 2</span><span class="sv" id="a_y2_val">900</span></div>
+              <p class="hint">After EGYPS 2027 conference exposure and referrals kick in</p>
               <input type="range" id="a_y2" min="100" max="2500" value="900" step="25" oninput="recalc()">
             </div>
 
             <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Paying users by end of Year 3</span>
-                <span class="slider-value" id="a_y3_val">2,400</span>
-              </div>
-              <p class="slider-hint">After Arab-region expansion and brand maturity</p>
+              <div class="sh"><span class="sl">Engineers paying by end of Year 3</span><span class="sv" id="a_y3_val">2,400</span></div>
+              <p class="hint">After expanding to Arab Gulf countries (Saudi, UAE, Kuwait)</p>
               <input type="range" id="a_y3" min="300" max="6000" value="2400" step="50" oninput="recalc()">
             </div>
 
             <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Average revenue per user per year</span>
-                <span class="slider-value" id="a_arpu_val">6,000 EGP</span>
-              </div>
-              <p class="slider-hint">Mix of Student (600), Pro (12K), and Team (48K+) tiers</p>
+              <div class="sh"><span class="sl">Average subscription price per engineer</span><span class="sv" id="a_arpu_val">6,000 EGP/yr</span></div>
+              <p class="hint">Students pay 600, Pros pay 12,000, Teams pay 48,000+. This is the average.</p>
               <input type="range" id="a_arpu" min="2000" max="18000" value="6000" step="500" oninput="recalc()">
             </div>
           </div>
 
           <!-- Model B -->
           <div class="slider-col">
-            <h4>Model B — Corporate SaaS</h4>
-            <p class="col-desc">ESE deployed inside EGPC refineries at prices they can actually approve.</p>
+            <h4>Track B — Refineries license ESE</h4>
+            <p class="col-desc">How many EGPC refinery companies sign up each year, and which pricing tier they choose.</p>
 
             <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Refinery companies in Year 1</span>
-                <span class="slider-value" id="b_y1_val">3</span>
-              </div>
-              <p class="slider-hint">Pilot deployments (usually 3–4 companies start)</p>
+              <div class="sh"><span class="sl">Refineries signed by end of Year 1</span><span class="sv" id="b_y1_val">3</span></div>
+              <p class="hint">Pilot deals — typically 3 companies run a trial first</p>
               <input type="range" id="b_y1" min="1" max="8" value="3" step="1" oninput="recalc()">
             </div>
 
             <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Refinery companies in Year 2</span>
-                <span class="slider-value" id="b_y2_val">7</span>
-              </div>
-              <p class="slider-hint">After first pilot results are published</p>
+              <div class="sh"><span class="sl">Refineries signed by end of Year 2</span><span class="sv" id="b_y2_val">7</span></div>
+              <p class="hint">After pilot results are published and procurement cycles complete</p>
               <input type="range" id="b_y2" min="2" max="10" value="7" step="1" oninput="recalc()">
             </div>
 
             <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Refinery companies in Year 3</span>
-                <span class="slider-value" id="b_y3_val">10</span>
-              </div>
-              <p class="slider-hint">Steady state — target all 10 EGPC subsidiaries</p>
+              <div class="sh"><span class="sl">Refineries signed by end of Year 3</span><span class="sv" id="b_y3_val">10</span></div>
+              <p class="hint">Steady state — all 10 target EGPC subsidiaries on board</p>
               <input type="range" id="b_y3" min="3" max="12" value="10" step="1" oninput="recalc()">
             </div>
 
             <div class="slider-group">
-              <div class="slider-header">
-                <span class="slider-label">Companies choosing Professional tier</span>
-                <span class="slider-value" id="b_mix_val">50%</span>
-              </div>
-              <p class="slider-hint">Professional (200K/yr) vs Starter (100K/yr). Higher % = more revenue</p>
+              <div class="sh"><span class="sl">Refineries choosing the Professional plan</span><span class="sv" id="b_mix_val">50%</span></div>
+              <p class="hint">Professional = 200K/yr (more features). Starter = 100K/yr. More Pros = more revenue.</p>
               <input type="range" id="b_mix" min="0" max="100" value="50" step="5" oninput="recalc()">
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Per-model summaries -->
-      <div class="calc-summaries">
-        <div class="calc-summary" id="ma_summary"></div>
-        <div class="calc-summary" id="mb_summary"></div>
+      <!-- Per-track summary cards -->
+      <div class="calc-bottom">
+        <div class="calc-summary" id="ma_summary"><!-- filled by JS --></div>
+        <div class="calc-summary" id="mb_summary"><!-- filled by JS --></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     MODEL A
-     ═══════════════════════════════════════════ -->
+<!-- ═══════════════ MODEL A DETAILS ═══════════════ -->
 <section>
   <div class="container">
-    <h2>Model A — Individual & SMB SaaS</h2>
-    <p class="section-intro">The cash-flow and feedback track. Sell ESE directly to petroleum engineers and small consulting firms across Egypt and the Arab region.</p>
+    <h2>Track A — What Engineers Buy</h2>
 
-    <h3>SKUs & Pricing</h3>
     <div class="card-grid">
       <div class="card">
-        <h4>ESE Free Trial</h4>
+        <h4>Free Trial</h4>
         <div class="price">0 EGP</div>
-        <ul><li>10 AI units (one-time)</li><li>1 seat · All apps view-only</li><li>No calc history</li><li>Read-only chat</li></ul>
+        <ul><li>10 AI units once</li><li>1 seat · View-only</li><li>No history</li></ul>
       </div>
       <div class="card">
-        <h4>ESE Student</h4>
+        <h4>Student</h4>
         <div class="price">600 <small>EGP/yr</small></div>
-        <ul><li>100 AI units/month</li><li>1 seat · All apps</li><li>90-day history</li><li>AI chat + email support</li><li>Verified .edu.eg required</li></ul>
+        <ul><li>100 AI units/month</li><li>1 seat · All apps</li><li>90-day history</li><li>Email support</li></ul>
       </div>
       <div class="card">
-        <h4>ESE Pro</h4>
+        <h4>Pro</h4>
         <div class="price">12,000 <small>EGP/yr</small></div>
-        <ul><li>500 AI units/month</li><li>1 seat · Unlimited history</li><li>Priority chat + support</li><li>PDF export</li><li>~$19/mo — under ChatGPT Plus</li></ul>
+        <ul><li>500 AI units/month</li><li>1 seat · Unlimited history</li><li>Priority support</li><li>PDF export</li></ul>
       </div>
       <div class="card">
-        <h4>ESE Team Starter</h4>
+        <h4>Team Starter</h4>
         <div class="price">48,000 <small>EGP/yr</small></div>
-        <ul><li>2,500 AI units/month pooled</li><li>5 seats · Admin dashboard</li><li>Shared history</li><li>For 5-person consulting shops</li></ul>
+        <ul><li>2,500 AI units/month</li><li>5 seats · Admin panel</li><li>Shared history</li></ul>
       </div>
     </div>
 
-    <h3>The Feedback Engine — Why Model A Matters</h3>
-    <p style="font-size:0.9rem;color:var(--muted)">Model A's biggest strategic asset isn't revenue — it's a <strong>direct line to real engineers</strong> who use ESE every day and tell us exactly what to build next.</p>
+    <h3 style="margin-top:28px">Why Track A Is More Than Just Revenue</h3>
+    <p style="font-size:0.9rem;color:var(--muted);margin-bottom:10px">Every paying engineer using ESE every day is a source of feedback. They tell us what's broken, what's missing, and what they need. We ship fixes every 2 weeks. By the time we pitch EGPC refineries, 1,500+ engineers have already battle-tested the product.</p>
     <div class="feedback-loop">
-      <div class="feedback-step"><span class="step-num">1</span><strong>In-app feedback</strong><p>Thumbs up/down + free-text on every AI response</p></div>
-      <div class="feedback-step"><span class="step-num">2</span><strong>Monthly digest</strong><p>Community Manager ranks top issues & requests</p></div>
-      <div class="feedback-step"><span class="step-num">3</span><strong>Bi-weekly updates</strong><p>Engineering ships fixes every 2 weeks</p></div>
-      <div class="feedback-step"><span class="step-num">4</span><strong>Public changelog</strong><p>Users see their feedback become product within days</p></div>
-      <div class="feedback-step"><span class="step-num">5</span><strong>Advisory panel</strong><p>Top 20 power users get early access + direct line</p></div>
+      <div class="feedback-step"><span class="n">1</span><strong>In-app feedback</strong><p>Thumbs up/down on every answer</p></div>
+      <div class="feedback-step"><span class="n">2</span><strong>Monthly ranking</strong><p>Top issues identified</p></div>
+      <div class="feedback-step"><span class="n">3</span><strong>Bi-weekly fixes</strong><p>Updates ship every 2 weeks</p></div>
+      <div class="feedback-step"><span class="n">4</span><strong>Public changelog</strong><p>Users see their ideas ship</p></div>
+      <div class="feedback-step"><span class="n">5</span><strong>Power user panel</strong><p>Top 20 get early access</p></div>
     </div>
-    <p style="margin-top:14px;font-size:0.9rem"><strong>This is Model B's secret weapon:</strong> By the time we walk into MIDOR, 1,500+ engineers have already told us exactly what Egyptian refiners need.</p>
 
-    <h3>Financials</h3>
+    <h3 style="margin-top:24px">Track A — Year by Year</h3>
     <div class="table-wrap">
       <table>
         <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
         <tbody>
-          <tr><td>Paying Users (end of year)</td><td>150</td><td>900</td><td>2,400</td></tr>
-          <tr><td>Revenue</td><td><span class="live-val" id="ma_rev1">650K</span> EGP</td><td><span class="live-val" id="ma_rev2">4,300K</span> EGP</td><td><span class="live-val" id="ma_rev3">8,800K</span> EGP</td></tr>
-          <tr><td>Cost (team + marketing + infra)</td><td><span class="live-val" id="ma_cost1">2,830K</span> EGP</td><td><span class="live-val" id="ma_cost2">4,280K</span> EGP</td><td><span class="live-val" id="ma_cost3">5,325K</span> EGP</td></tr>
-          <tr><td><strong>Net</strong></td><td><strong><span class="live-val" id="ma_net1">-2,180K</span> EGP</strong></td><td><strong><span class="live-val" id="ma_net2">+20K</span> EGP</strong></td><td><strong><span class="live-val" id="ma_net3">+3,475K</span> EGP</strong></td></tr>
+          <tr><td>Paying engineers (end of year)</td><td>150</td><td>900</td><td>2,400</td></tr>
+          <tr><td>Money coming in</td><td><span class="live-val" id="ma_rev1">650K</span> EGP</td><td><span class="live-val" id="ma_rev2">4.3M</span> EGP</td><td><span class="live-val" id="ma_rev3">8.8M</span> EGP</td></tr>
+          <tr><td>Money going out</td><td><span class="live-val" id="ma_cost1">2.8M</span> EGP</td><td><span class="live-val" id="ma_cost2">4.3M</span> EGP</td><td><span class="live-val" id="ma_cost3">5.3M</span> EGP</td></tr>
+          <tr><td><strong>Net result</strong></td><td><strong><span class="live-val" id="ma_net1">-2.2M</span> EGP</strong></td><td><strong><span class="live-val" id="ma_net2">+20K</span> EGP</strong></td><td><strong><span class="live-val" id="ma_net3">+3.5M</span> EGP</strong></td></tr>
         </tbody>
       </table>
     </div>
-    <p style="font-size:0.85rem;color:var(--muted)">Break-even at Y2Q4 (month ~22). 3-year cumulative net: +1.3M EGP. IRR: ~22–28%.</p>
+    <p style="font-size:0.85rem;color:var(--muted)">Track A breaks even around month 22 (late Year 2). By itself, it's a modest business — but its real value is proving that engineers want ESE and feeding feedback into Track B.</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     MODEL B
-     ═══════════════════════════════════════════ -->
+<!-- ═══════════════ MODEL B DETAILS ═══════════════ -->
 <section>
   <div class="container">
-    <h2>Model B — Corporate SaaS for EGPC Refineries</h2>
-    <p class="section-intro">The strategic market-entry track. Land ESE inside Egypt's refineries at honest Egyptian prices, build the reference base, and unlock high-ticket Model C deals from Year 4.</p>
+    <h2>Track B — What Refineries Buy</h2>
 
-    <h3>SKUs — Priced for What Refineries Can Actually Pay</h3>
     <div class="card-grid">
       <div class="card">
-        <h4>ESE Refinery Starter</h4>
+        <h4>Refinery Starter</h4>
         <div class="price">100,000 <small>EGP/yr</small></div>
-        <ul><li>Up to 10 named users</li><li>All ESE engineering apps</li><li>50K AI units/year</li><li>Business-hours email support</li><li>Annual contract</li></ul>
+        <ul><li>Up to 10 engineers</li><li>All ESE apps</li><li>50K AI units/year</li><li>Business-hours support</li></ul>
       </div>
       <div class="card">
-        <h4>ESE Refinery Professional</h4>
+        <h4>Refinery Professional</h4>
         <div class="price">200,000 <small>EGP/yr</small></div>
-        <ul><li>Up to 25 named users</li><li>All apps + custom RAG (SOPs/manuals)</li><li>150K AI units/year</li><li>Priority phone + email support</li><li>Quarterly engineering review meeting</li></ul>
+        <ul><li>Up to 25 engineers</li><li>All apps + their own manuals loaded in</li><li>150K AI units/year</li><li>Priority support + quarterly review</li></ul>
       </div>
     </div>
 
-    <h3>Target: 10 EGPC Subsidiary Refineries</h3>
+    <h3 style="margin-top:24px">The 10 Refineries We Target</h3>
     <div class="two-col">
       <div>
-        <h4 style="color:var(--blue);margin-bottom:8px;font-size:0.95rem">Professional tier (200K/yr)</h4>
-        <ul style="list-style:none;font-size:0.9rem">
-          <li style="padding:3px 0">✓ MIDOR (170K bbl/d, $2.2B modernized)</li>
-          <li style="padding:3px 0">✓ CORC Mostorod + Tanta (142K bbl/d)</li>
-          <li style="padding:3px 0">✓ ANOPC / ASORC ($3B hydrocracker)</li>
-          <li style="padding:3px 0">✓ APC — Alexandria Petroleum</li>
+        <p style="font-weight:700;color:var(--blue);margin-bottom:6px;font-size:0.93rem">Professional tier (200K/yr)</p>
+        <ul style="list-style:none;font-size:0.88rem">
+          <li>✓ MIDOR — Alexandria (170K bbl/day)</li>
+          <li>✓ CORC — Mostorod + Tanta</li>
+          <li>✓ ANOPC / ASORC ($3B hydrocracker)</li>
+          <li>✓ APC — Alexandria Petroleum</li>
         </ul>
       </div>
       <div>
-        <h4 style="color:var(--blue);margin-bottom:8px;font-size:0.95rem">Starter tier (100K/yr)</h4>
-        <ul style="list-style:none;font-size:0.9rem">
-          <li style="padding:3px 0">✓ SOPC — Suez</li>
-          <li style="padding:3px 0">✓ Ameriya Petroleum</li>
-          <li style="padding:3px 0">✓ GPC (El Nasr)</li>
-          <li style="padding:3px 0">✓ SIDPEC — Petrochemical</li>
-          <li style="padding:3px 0">✓ +2 smaller EGPC subsidiaries</li>
+        <p style="font-weight:700;color:var(--blue);margin-bottom:6px;font-size:0.93rem">Starter tier (100K/yr)</p>
+        <ul style="list-style:none;font-size:0.88rem">
+          <li>✓ SOPC — Suez</li>
+          <li>✓ Ameriya Petroleum</li>
+          <li>✓ GPC (El Nasr)</li>
+          <li>✓ SIDPEC — Petrochemical</li>
+          <li>✓ +2 smaller subsidiaries</li>
         </ul>
       </div>
     </div>
-    <p style="margin-top:10px;font-size:0.9rem"><strong>Steady-state TAM: ~1.7–1.85M EGP/yr</strong> across 10 companies. This is the honest ceiling for Egypt's petroleum sector in 2026.</p>
+    <p style="margin-top:8px;font-size:0.9rem"><strong>Total market size:</strong> ~1.7–1.85 million EGP per year across all 10 refineries. This is the honest ceiling for Egypt's petroleum sector right now.</p>
 
-    <h3>Financials — Lean & Cloud-First</h3>
+    <h3 style="margin-top:24px">Track B — Year by Year</h3>
     <div class="table-wrap">
       <table>
         <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th></tr></thead>
         <tbody>
-          <tr><td>Refinery Companies Active</td><td>3 (pilots)</td><td>7</td><td>10</td></tr>
-          <tr><td>Revenue</td><td><span class="live-val" id="mb_rev1">75K</span> EGP</td><td><span class="live-val" id="mb_rev2">1,150K</span> EGP</td><td><span class="live-val" id="mb_rev3">2,250K</span> EGP</td></tr>
-          <tr><td>Cost (lean team + cloud AI)</td><td><span class="live-val" id="mb_cost1">1,856K</span> EGP</td><td><span class="live-val" id="mb_cost2">2,520K</span> EGP</td><td><span class="live-val" id="mb_cost3">3,685K</span> EGP</td></tr>
-          <tr><td><strong>Net</strong></td><td><strong><span class="live-val" id="mb_net1">-1,781K</span> EGP</strong></td><td><strong><span class="live-val" id="mb_net2">-1,370K</span> EGP</strong></td><td><strong><span class="live-val" id="mb_net3">-1,435K</span> EGP</strong></td></tr>
+          <tr><td>Refineries signed</td><td>3 (pilots)</td><td>7</td><td>10</td></tr>
+          <tr><td>Money coming in</td><td><span class="live-val" id="mb_rev1">75K</span> EGP</td><td><span class="live-val" id="mb_rev2">1.2M</span> EGP</td><td><span class="live-val" id="mb_rev3">2.3M</span> EGP</td></tr>
+          <tr><td>Money going out</td><td><span class="live-val" id="mb_cost1">1.9M</span> EGP</td><td><span class="live-val" id="mb_cost2">2.5M</span> EGP</td><td><span class="live-val" id="mb_cost3">3.7M</span> EGP</td></tr>
+          <tr><td><strong>Net result</strong></td><td><strong><span class="live-val" id="mb_net1">-1.8M</span> EGP</strong></td><td><strong><span class="live-val" id="mb_net2">-1.4M</span> EGP</strong></td><td><strong><span class="live-val" id="mb_net3">-1.4M</span> EGP</strong></td></tr>
         </tbody>
       </table>
     </div>
 
     <div class="highlight">
-      <strong>Honest assessment:</strong> Model B is a <strong>strategic market-entry investment</strong>, not a standalone profit center. It is cash-negative through Year 3. The real return comes in Year 4+ when 10 EGPC refinery references enable Model C (on-prem appliance at 5–18M EGP per deal) and Model D (consulting). Think of Model B as the cost of building an unassailable reference base.
+      <strong>Honest truth:</strong> Track B loses money through Year 3. It is an investment in building credibility. The real return comes in Year 4+ when 10 refinery references allow us to sell bigger on-premise systems at 5–18 million EGP each. Think of Track B as <strong>the cost of building an unassailable reference list.</strong>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     COMBINED STRATEGY
-     ═══════════════════════════════════════════ -->
+<!-- ═══════════════ COMBINED ═══════════════ -->
 <section>
   <div class="container">
-    <h2>How the Two Tracks Fit Together</h2>
-    <div class="card-grid">
+    <h2>The Full Picture — Both Tracks Together</h2>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>Year 1</th><th>Year 2</th><th>Year 3</th><th>3-Year Total</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Total money coming in</strong></td><td><span class="live-val" id="comb_rev1">725K</span></td><td><span class="live-val" id="comb_rev2">5.5M</span></td><td><span class="live-val" id="comb_rev3">11.1M</span></td><td><strong><span class="live-val" id="comb_cum_rev">17.3M</span> EGP</strong></td></tr>
+          <tr><td>Total money going out</td><td><span class="live-val" id="comb_cost1">4.7M</span></td><td><span class="live-val" id="comb_cost2">6.8M</span></td><td><span class="live-val" id="comb_cost3">9.0M</span></td><td><span class="live-val" id="comb_cum_cost">20.5M</span> EGP</td></tr>
+          <tr><td><strong>Net result</strong></td><td><strong><span class="live-val" id="comb_net1">-4.0M</span></strong></td><td><strong><span class="live-val" id="comb_net2">-1.4M</span></strong></td><td><strong><span class="live-val" id="comb_net3">+2.0M</span></strong></td><td><strong><span class="live-val" id="comb_cum">-3.3M</span> EGP</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-grid" style="margin-top:16px">
       <div class="card">
-        <h4>Model A → Model B</h4>
-        <p style="font-size:0.88rem;color:var(--muted)">User feedback from 1,500+ engineers tells us what refiners need. Case studies arm EGPC pitches. Cash flow offsets shared costs.</p>
+        <h4>Track A feeds Track B</h4>
+        <p style="font-size:0.85rem;color:var(--muted)">Feedback from 1,500+ engineers tells us what refiners need. Case studies arm the sales pitch. Cash from subscriptions offsets shared costs.</p>
       </div>
       <div class="card">
-        <h4>Model B → Model C</h4>
-        <p style="font-size:0.88rem;color:var(--muted)">10 EGPC refinery references = the credential to sell Model C on-prem appliances at 5–18M EGP per deal. Relationships compound.</p>
+        <h4>Track B builds toward Track C</h4>
+        <p style="font-size:0.85rem;color:var(--muted)">10 refinery references = the credential to sell on-premise systems at 10× the price. Relationships and case studies compound.</p>
       </div>
       <div class="card">
-        <h4>Egyptian Data Sovereignty</h4>
-        <p style="font-size:0.88rem;color:var(--muted)">Data stays in Egypt. AI built by Egyptian engineers. Priced for Egyptian budgets. Law 151/2020 compliant by design.</p>
+        <h4>Data stays in Egypt</h4>
+        <p style="font-size:0.85rem;color:var(--muted)">Built by Egyptian engineers. Priced for Egyptian budgets. Compliant with Egypt's data protection law (151/2020).</p>
       </div>
       <div class="card">
-        <h4>Stage Gates</h4>
-        <p style="font-size:0.88rem;color:var(--muted)">① 3 pilots signed Y1Q3. ② v2 product ready Y1Q3. ③ Model A running in parallel. If gates missed → revert to Model A-only.</p>
+        <h4>Stage gates protect the investment</h4>
+        <p style="font-size:0.85rem;color:var(--muted)">3 pilots by Y1Q3. Product ready by Y1Q3. If gates missed → scale back to Track A only. No throwing good money after bad.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     DOWNLOADS
-     ═══════════════════════════════════════════ -->
+<!-- ═══════════════ DOWNLOADS ═══════════════ -->
 <section>
   <div class="container">
     <h2>Downloads</h2>
-    <p class="section-intro">Complete business model documentation — April 2026 (v2, Egyptian Economic Reality pricing).</p>
+    <p class="intro">Full documentation — April 2026 (v2). All prices reflect Egypt's current economic reality.</p>
     <div class="downloads">
       <a href="ESE_Business_Model_v2.docx" class="dl-card">
         <span class="dl-icon">📄</span>
-        <div class="dl-info"><strong>Word Document</strong><span>Full Model A + B</span></div>
+        <div class="dl-info"><strong>Word Document</strong><span>Complete Model A + B</span></div>
       </a>
       <a href="ESE_Cash_Flow_Model_v2.xlsx" class="dl-card">
         <span class="dl-icon">📊</span>
-        <div class="dl-info"><strong>Excel Cash Flow</strong><span>3-year · 3 scenarios</span></div>
+        <div class="dl-info"><strong>Excel Spreadsheet</strong><span>3-year · 3 scenarios</span></div>
       </a>
       <a href="ESE_Business_Model_v2.pptx" class="dl-card">
         <span class="dl-icon">📽️</span>
@@ -688,240 +570,164 @@
       </a>
       <a href="ESE_Model_A_Individuals_SaaS.md" class="dl-card">
         <span class="dl-icon">📝</span>
-        <div class="dl-info"><strong>Model A (Markdown)</strong><span>Full detailed breakdown</span></div>
+        <div class="dl-info"><strong>Track A (Full)</strong><span>Detailed markdown</span></div>
       </a>
       <a href="ESE_Model_B_Corporate_SaaS.md" class="dl-card">
         <span class="dl-icon">📝</span>
-        <div class="dl-info"><strong>Model B (Markdown)</strong><span>Full detailed breakdown</span></div>
+        <div class="dl-info"><strong>Track B (Full)</strong><span>Detailed markdown</span></div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════
-     FOOTER
-     ═══════════════════════════════════════════ -->
 <footer>
   <p>ESE — EPROM Smart Engineering &copy; 2026. Built by EPROM process engineers for Egypt's petroleum industry.</p>
   <p style="margin-top:6px"><a href="https://github.com/Amsamms/ese-business-model">GitHub</a> · <a href="https://eprom-portal.xyz">EPROM Portal</a> · <a href="https://ese.eprom.com.eg">ESE Production</a></p>
 </footer>
 
-<!-- ═══════════════════════════════════════════
-     JAVASCRIPT
-     ═══════════════════════════════════════════ -->
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
 <script>
-// Values are in thousands of EGP (K). Format for display.
-const fmt = (n) => {
-  const v = Math.round(n); // value in K EGP
-  const abs = Math.abs(v);
-  if (abs >= 1e6) return (v/1e6).toFixed(2) + 'B';  // billions
-  if (abs >= 1e3) return (v/1e3).toFixed(1) + 'M';  // millions
-  return v.toFixed(0) + 'K';                         // thousands
-};
-const fmtFull = (n) => {
-  const v = Math.round(n); // value in K EGP
-  const abs = Math.abs(v);
-  if (abs >= 1e6) return (v/1e6).toFixed(2) + 'B';
-  if (abs >= 1e3) return (v/1e3).toFixed(1) + 'M';
-  return v.toFixed(0) + 'K';
-};
-const sign = (n) => n >= 0 ? '+' : '';
+// ── Formatting (values in thousands EGP) ──
+const fmtM = (v) => { const a=Math.abs(Math.round(v)); return a>=1e3 ? (a/1e3).toFixed(1)+'M' : a+'K'; };
+const fmtK = (v) => Math.abs(Math.round(v)).toLocaleString('en-US') + 'K';
+const sgn = (n) => n>=0?'+':'';
 
-// Document base case financials (in K EGP) — these are the actual numbers
-const MA_BASE_USERS = [150, 900, 2400];
-const MA_BASE_REV   = [650, 4300, 8800];
-const MA_BASE_COST  = [2830, 4280, 5325];
-const MA_BASE_ARPU  = 6000; // blended sticker ARPU (quarterly ramp reduces effective)
+// ── Documented base case (K EGP) ──
+const BA = { users:[150,900,2400], rev:[650,4300,8800], cost:[2830,4280,5325], arpu:6000 };
+const BB = { comps:[3,7,10], rev:[75,1150,2250], cost:[1856,2520,3685], price:150 };
 
-const MB_BASE_COMPS = [3, 7, 10];
-const MB_BASE_REV   = [75, 1150, 2250];
-const MB_BASE_COST  = [1856, 2520, 3685];
-const MB_BASE_PRICE = 150; // 50/50 mix of 100K + 200K
-
-// Preset definitions
 const presets = {
   conservative: { a_y1:80, a_y2:400, a_y3:1200, a_arpu:4500, b_y1:2, b_y2:4, b_y3:6, b_mix:25 },
   base:         { a_y1:150, a_y2:900, a_y3:2400, a_arpu:6000, b_y1:3, b_y2:7, b_y3:10, b_mix:50 },
   aggressive:   { a_y1:250, a_y2:1800, a_y3:4500, a_arpu:8500, b_y1:5, b_y2:9, b_y3:12, b_mix:75 }
 };
 
-function setPreset(name) {
-  const p = presets[name];
-  for (const [id, val] of Object.entries(p)) {
-    document.getElementById(id).value = val;
-  }
+function setPreset(n) {
+  for (const [k,v] of Object.entries(presets[n])) document.getElementById(k).value = v;
   recalc();
 }
 
 function recalc() {
-  const a_y1 = +document.getElementById('a_y1').value;
-  const a_y2 = +document.getElementById('a_y2').value;
-  const a_y3 = +document.getElementById('a_y3').value;
-  const a_arpu = +document.getElementById('a_arpu').value;
-  const b_y1 = +document.getElementById('b_y1').value;
-  const b_y2 = +document.getElementById('b_y2').value;
-  const b_y3 = +document.getElementById('b_y3').value;
-  const b_mix = (+document.getElementById('b_mix').value) / 100;
+  const a_y1=+document.getElementById('a_y1').value, a_y2=+document.getElementById('a_y2').value, a_y3=+document.getElementById('a_y3').value, a_arpu=+document.getElementById('a_arpu').value;
+  const b_y1=+document.getElementById('b_y1').value, b_y2=+document.getElementById('b_y2').value, b_y3=+document.getElementById('b_y3').value, b_mix=(+document.getElementById('b_mix').value)/100;
 
-  // Update slider labels
+  // Update labels
   document.getElementById('a_y1_val').textContent = a_y1.toLocaleString('en-US');
   document.getElementById('a_y2_val').textContent = a_y2.toLocaleString('en-US');
   document.getElementById('a_y3_val').textContent = a_y3.toLocaleString('en-US');
-  document.getElementById('a_arpu_val').textContent = a_arpu.toLocaleString('en-US') + ' EGP';
+  document.getElementById('a_arpu_val').textContent = a_arpu.toLocaleString('en-US') + ' EGP/yr';
   document.getElementById('b_y1_val').textContent = b_y1;
   document.getElementById('b_y2_val').textContent = b_y2;
   document.getElementById('b_y3_val').textContent = b_y3;
-  document.getElementById('b_mix_val').textContent = Math.round(b_mix * 100) + '%';
+  document.getElementById('b_mix_val').textContent = Math.round(b_mix*100) + '%';
 
-  // ── Model A: scale from documented base case ──
-  // Revenue scales linearly with both user count and ARPU relative to base
-  const a_users = [a_y1, a_y2, a_y3];
-  const a_rev = a_users.map((u, i) => {
-    const userRatio = u / MA_BASE_USERS[i];
-    const arpuRatio = a_arpu / MA_BASE_ARPU;
-    return Math.round(MA_BASE_REV[i] * userRatio * arpuRatio);
-  });
-  // Costs scale sub-linearly with user count (economies of scale)
-  const a_cost = a_users.map((u, i) => {
-    const ratio = Math.max(u / MA_BASE_USERS[i], 0.15);
-    return Math.round(MA_BASE_COST[i] * Math.pow(ratio, 0.7));
-  });
+  // ── Model A: scale from base ──
+  const au = [a_y1,a_y2,a_y3];
+  const a_rev = au.map((u,i) => Math.round(BA.rev[i] * (u/BA.users[i]) * (a_arpu/BA.arpu)));
+  const a_cost = au.map((u,i) => Math.round(BA.cost[i] * Math.pow(Math.max(u/BA.users[i],0.15), 0.7)));
   const a_net = [a_rev[0]-a_cost[0], a_rev[1]-a_cost[1], a_rev[2]-a_cost[2]];
   const a_cum = a_net[0]+a_net[1]+a_net[2];
-  const a_roi = a_cum / (a_cost[0]+a_cost[1]+a_cost[2]) * 100;
 
-  // ── Model B: scale from documented base case ──
-  const b_avg_price = 100 + b_mix * (200-100);
-  const b_priceRatio = b_avg_price / MB_BASE_PRICE;
-  const b_comps = [b_y1, b_y2, b_y3];
-  const b_rev = b_comps.map((c, i) => {
-    const compRatio = c / MB_BASE_COMPS[i];
-    return Math.round(MB_BASE_REV[i] * compRatio * b_priceRatio);
-  });
-  const b_cost = b_comps.map((c, i) => {
-    const ratio = Math.max(c / MB_BASE_COMPS[i], 0.25);
-    return Math.round(MB_BASE_COST[i] * Math.pow(ratio, 0.6));
-  });
+  // ── Model B: scale from base ──
+  const bp = 100 + b_mix*(200-100);
+  const bc = [b_y1,b_y2,b_y3];
+  const b_rev = bc.map((c,i) => Math.round(BB.rev[i] * (c/BB.comps[i]) * (bp/BB.price)));
+  const b_cost = bc.map((c,i) => Math.round(BB.cost[i] * Math.pow(Math.max(c/BB.comps[i],0.25), 0.6)));
   const b_net = [b_rev[0]-b_cost[0], b_rev[1]-b_cost[1], b_rev[2]-b_cost[2]];
   const b_cum = b_net[0]+b_net[1]+b_net[2];
-  const b_roi = b_cum / (b_cost[0]+b_cost[1]+b_cost[2]) * 100;
 
   // ── Combined ──
-  const comb_rev = [a_rev[0]+b_rev[0], a_rev[1]+b_rev[1], a_rev[2]+b_rev[2]];
-  const comb_cost = [a_cost[0]+b_cost[0], a_cost[1]+b_cost[1], a_cost[2]+b_cost[2]];
-  const comb_net = [comb_rev[0]-comb_cost[0], comb_rev[1]-comb_cost[1], comb_rev[2]-comb_cost[2]];
-  const comb_cum = comb_net[0]+comb_net[1]+comb_net[2];
-  const total_investment = comb_cost[0]+comb_cost[1]+comb_cost[2];
-  const total_rev = comb_rev[0]+comb_rev[1]+comb_rev[2];
-  const combined_roi = comb_cum / total_investment * 100;
+  const cr = [a_rev[0]+b_rev[0], a_rev[1]+b_rev[1], a_rev[2]+b_rev[2]];
+  const cc = [a_cost[0]+b_cost[0], a_cost[1]+b_cost[1], a_cost[2]+b_cost[2]];
+  const cn = [cr[0]-cc[0], cr[1]-cc[1], cr[2]-cc[2]];
+  const ctot = cr[0]+cr[1]+cr[2];
+  const citot = cc[0]+cc[1]+cc[2];
+  const ccum = cn[0]+cn[1]+cn[2];
 
-  // Payback period (months)
-  let payback = null;
-  for (let y=0; y<3; y++) { if (!comb_net[y]) comb_net[y]=0; }
-  const monthly = comb_net.map(n => n/12);
-  let running = 0;
-  for (let m=1; m<=36; m++) {
-    running += monthly[Math.floor((m-1)/12)];
-    if (running >= 0 && payback === null) payback = m;
+  // ── Payback (months) ──
+  let payback = null, running = 0;
+  const monthly = cn.map(n => n/12);
+  for (let m=1; m<=36; m++) { running += monthly[Math.floor((m-1)/12)]; if (running>=0 && payback===null) payback = m; }
+
+  // ── PAYBACK HERO ──
+  const hero = document.getElementById('payback_hero');
+  if (payback) {
+    const y = Math.floor(payback/12), mo = payback%12;
+    const when = y>0 ? (mo>0 ? y+' year'+(y>1?'s':'')+' and '+mo+' month'+(mo>1?'s':'') : y+' year'+(y>1?'s':'')) : mo+' month'+(mo>1?'s':'');
+    hero.innerHTML =
+      '<div class="question">You recover the full investment in</div>' +
+      '<div class="answer good">' + when + '</div>' +
+      '<div class="context">From that point forward, every pound earned is profit. By Year 3, annual revenue is ' + fmtM(cr[2]) + ' EGP.</div>' +
+      '<div class="payback-details">' +
+        '<div class="pd-item"><div class="val">' + fmtM(citot) + ' EGP</div><div class="lbl">Total invested over 3 years</div></div>' +
+        '<div class="pd-item"><div class="val" style="color:#68d391">' + fmtM(ctot) + ' EGP</div><div class="lbl">Total earned over 3 years</div></div>' +
+        '<div class="pd-item"><div class="val" style="color:' + (ccum>=0?'#68d391':'#fc8181') + '">' + sgn(ccum) + fmtM(ccum) + ' EGP</div><div class="lbl">Net result after 3 years</div></div>' +
+      '</div>';
+  } else {
+    hero.innerHTML =
+      '<div class="question">The combined investment is not recovered within 3 years</div>' +
+      '<div class="answer bad">Beyond 3 years</div>' +
+      '<div class="context">Track B is a strategic investment — it builds the reference list needed for high-ticket Model C deals from Year 4 onward. Track A alone breaks even in ~22 months.</div>' +
+      '<div class="payback-details">' +
+        '<div class="pd-item"><div class="val">' + fmtM(citot) + ' EGP</div><div class="lbl">Total invested over 3 years</div></div>' +
+        '<div class="pd-item"><div class="val">' + fmtM(ctot) + ' EGP</div><div class="lbl">Total earned over 3 years</div></div>' +
+        '<div class="pd-item"><div class="val" style="color:#fc8181">' + sgn(ccum) + fmtM(ccum) + ' EGP</div><div class="lbl">Net result after 3 years</div></div>' +
+        '<div class="pd-item"><div class="val" style="color:#68d391">~22 months</div><div class="lbl">Track A alone breaks even</div></div>' +
+      '</div>';
   }
 
-  // ── ROI hero ──
-  const roiClass = combined_roi >= 0 ? 'positive' : 'negative';
-  const roiDisplay = combined_roi >= 0 ? '+' + combined_roi.toFixed(1) + '%' : combined_roi.toFixed(1) + '%';
-  const paybackDisplay = payback
-    ? (combined_roi >= 0 ? 'Breakeven in ~' + payback + ' months' : 'Investment phase — breakeven in ~' + payback + ' months')
-    : 'Cash-negative through 3 years — strategic investment';
+  // ── COST BARS ──
+  // Simulate cost breakdown from the model (approximate percentages)
+  const teamCost = Math.round(citot * 0.58), mktCost = Math.round(citot * 0.12), infraCost = Math.round(citot * 0.10), legalCost = Math.round(citot * 0.07), otherCost = citot - teamCost - mktCost - infraCost - legalCost;
+  document.getElementById('cost_bars').innerHTML =
+    '<div class="cost-bar-row"><div class="cost-label"><strong>People (salaries)</strong><span>' + fmtM(teamCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill team" style="width:' + (teamCost/citot*100) + '%"></div></div></div>' +
+    '<div class="cost-bar-row"><div class="cost-label"><strong>Marketing</strong><span>' + fmtM(mktCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill marketing" style="width:' + (mktCost/citot*100) + '%"></div></div></div>' +
+    '<div class="cost-bar-row"><div class="cost-label"><strong>Infrastructure (cloud + AI)</strong><span>' + fmtM(infraCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill infra" style="width:' + (infraCost/citot*100) + '%"></div></div></div>' +
+    '<div class="cost-bar-row"><div class="cost-label"><strong>Legal & certifications</strong><span>' + fmtM(legalCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill legal" style="width:' + (legalCost/citot*100) + '%"></div></div></div>' +
+    '<div class="cost-bar-row"><div class="cost-label"><strong>Other (fees, tools, buffer)</strong><span>' + fmtM(otherCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill other" style="width:' + (otherCost/citot*100) + '%"></div></div></div>' +
+    '<div class="cost-total">Total: ' + fmtM(citot) + ' EGP over 3 years</div>';
 
-  document.getElementById('roi_hero').innerHTML =
-    '<div class="roi-label">Combined 3-Year Return on Investment</div>' +
-    '<div class="roi-number ' + roiClass + '">' + roiDisplay + '</div>' +
-    '<div class="roi-subtitle">' + paybackDisplay + '</div>' +
-    '<div class="roi-details">' +
-      '<div class="roi-detail-item"><div class="val">' + fmtFull(total_rev) + ' EGP</div><div class="label">3yr Revenue</div></div>' +
-      '<div class="roi-detail-item"><div class="val">' + fmtFull(total_investment) + ' EGP</div><div class="label">3yr Investment</div></div>' +
-      '<div class="roi-detail-item"><div class="val" style="' + (comb_cum>=0?'color:#68d391':'color:#fc8181') + '">' + sign(comb_cum) + fmtFull(comb_cum) + ' EGP</div><div class="label">Net Return</div></div>' +
-      '<div class="roi-detail-item"><div class="val">' + fmtFull(comb_rev[2]) + ' EGP</div><div class="label">Y3 Run Rate</div></div>' +
-    '</div>';
+  document.getElementById('cost_total_3yr').textContent = fmtM(citot);
+  document.getElementById('cost_team_pct').textContent = Math.round(teamCost/citot*100);
+  document.getElementById('cost_mkt_pct').textContent = Math.round(mktCost/citot*100);
+  document.getElementById('cost_infra_pct').textContent = Math.round(infraCost/citot*100);
+  document.getElementById('cost_legal_pct').textContent = Math.round(legalCost/citot*100);
 
-  // ── Model A summary ──
+  // ── TRACK SUMMARIES ──
   document.getElementById('ma_summary').innerHTML =
-    '<h5>Model A — Individual SaaS</h5>' +
-    '<div class="row"><span>Y3 Users</span><span>' + a_y3.toLocaleString('en-US') + '</span></div>' +
-    '<div class="row"><span>Y3 Revenue</span><span>' + fmtFull(a_rev[2]) + ' EGP</span></div>' +
-    '<div class="row"><span>Y3 Net</span><span class="' + (a_net[2]>=0?'pos':'neg') + '">' + sign(a_net[2]) + fmtFull(a_net[2]) + ' EGP</span></div>' +
-    '<div class="row"><span>3yr Cumulative</span><span class="' + (a_cum>=0?'pos':'neg') + '">' + sign(a_cum) + fmtFull(a_cum) + ' EGP</span></div>' +
-    '<div class="row"><span><strong>Standalone ROI</strong></span><span class="' + (a_roi>=0?'pos':'neg') + '"><strong>' + (a_roi>=0?'+':'') + a_roi.toFixed(1) + '%</strong></span></div>';
+    '<h5>Track A — Engineers</h5>' +
+    '<div class="row"><span>Engineers by Y3</span><span>' + a_y3.toLocaleString('en-US') + '</span></div>' +
+    '<div class="row"><span>Y3 Revenue</span><span>' + fmtM(a_rev[2]) + ' EGP</span></div>' +
+    '<div class="row"><span>Y3 Net</span><span class="' + (a_net[2]>=0?'pos':'neg') + '">' + sgn(a_net[2]) + fmtM(a_net[2]) + ' EGP</span></div>' +
+    '<div class="row"><span>3yr Total</span><span class="' + (a_cum>=0?'pos':'neg') + '">' + sgn(a_cum) + fmtM(a_cum) + ' EGP</span></div>';
 
-  // ── Model B summary ──
   document.getElementById('mb_summary').innerHTML =
-    '<h5>Model B — Corporate SaaS</h5>' +
-    '<div class="row"><span>Y3 Companies</span><span>' + b_y3 + ' refineries</span></div>' +
-    '<div class="row"><span>Avg Price/Co</span><span>' + Math.round(b_avg_price) + 'K EGP/yr</span></div>' +
-    '<div class="row"><span>Y3 Revenue</span><span>' + fmtFull(b_rev[2]) + ' EGP</span></div>' +
-    '<div class="row"><span>Y3 Net</span><span class="' + (b_net[2]>=0?'pos':'neg') + '">' + sign(b_net[2]) + fmtFull(b_net[2]) + ' EGP</span></div>' +
-    '<div class="row"><span>3yr Cumulative</span><span class="' + (b_cum>=0?'pos':'neg') + '">' + sign(b_cum) + fmtFull(b_cum) + ' EGP</span></div>';
+    '<h5>Track B — Refineries</h5>' +
+    '<div class="row"><span>Refineries by Y3</span><span>' + b_y3 + '</span></div>' +
+    '<div class="row"><span>Avg price</span><span>' + Math.round(bp) + 'K EGP/yr</span></div>' +
+    '<div class="row"><span>Y3 Revenue</span><span>' + fmtM(b_rev[2]) + ' EGP</span></div>' +
+    '<div class="row"><span>3yr Total</span><span class="' + (b_cum>=0?'pos':'neg') + '">' + sgn(b_cum) + fmtM(b_cum) + ' EGP</span></div>';
 
-  // ── Update inline financial tables ──
-  updateCell('ma_rev1', fmtFull(a_rev[0]) + ' EGP');
-  updateCell('ma_rev2', fmtFull(a_rev[1]) + ' EGP');
-  updateCell('ma_rev3', fmtFull(a_rev[2]) + ' EGP');
-  updateCell('ma_cost1', fmtFull(a_cost[0]) + ' EGP');
-  updateCell('ma_cost2', fmtFull(a_cost[1]) + ' EGP');
-  updateCell('ma_cost3', fmtFull(a_cost[2]) + ' EGP');
-  updateCell('ma_net1', sign(a_net[0]) + fmtFull(a_net[0]) + ' EGP');
-  updateCell('ma_net2', sign(a_net[1]) + fmtFull(a_net[1]) + ' EGP');
-  updateCell('ma_net3', sign(a_net[2]) + fmtFull(a_net[2]) + ' EGP');
-
-  updateCell('mb_rev1', fmtFull(b_rev[0]) + ' EGP');
-  updateCell('mb_rev2', fmtFull(b_rev[1]) + ' EGP');
-  updateCell('mb_rev3', fmtFull(b_rev[2]) + ' EGP');
-  updateCell('mb_cost1', fmtFull(b_cost[0]) + ' EGP');
-  updateCell('mb_cost2', fmtFull(b_cost[1]) + ' EGP');
-  updateCell('mb_cost3', fmtFull(b_cost[2]) + ' EGP');
-  updateCell('mb_net1', sign(b_net[0]) + fmtFull(b_net[0]) + ' EGP');
-  updateCell('mb_net2', sign(b_net[1]) + fmtFull(b_net[1]) + ' EGP');
-  updateCell('mb_net3', sign(b_net[2]) + fmtFull(b_net[2]) + ' EGP');
-
-  updateCell('exec_ma_rev', (a_rev[2]/1e3).toFixed(2) + 'M EGP');
-  updateCell('exec_mb_rev', (b_rev[2]/1e3).toFixed(2) + 'M EGP');
-  updateCell('exec_comb_rev', (comb_rev[2]/1e3).toFixed(2) + 'M EGP');
-  updateCell('exec_ma_net', sign(a_net[2]) + (Math.abs(a_net[2])/1e3).toFixed(2) + 'M EGP');
-  updateCell('exec_mb_net', sign(b_net[2]) + (Math.abs(b_net[2])/1e3).toFixed(2) + 'M EGP');
-  updateCell('exec_comb_net', sign(comb_net[2]) + (Math.abs(comb_net[2])/1e3).toFixed(2) + 'M EGP');
-
-  updateCell('comb_rev1', fmtFull(comb_rev[0]));
-  updateCell('comb_rev2', fmtFull(comb_rev[1]));
-  updateCell('comb_rev3', fmtFull(comb_rev[2]));
-  updateCell('comb_cum', sign(comb_cum) + fmtFull(comb_cum));
-  updateCell('comb_cost1', fmtFull(comb_cost[0]));
-  updateCell('comb_cost2', fmtFull(comb_cost[1]));
-  updateCell('comb_cost3', fmtFull(comb_cost[2]));
-  updateCell('comb_net1', sign(comb_net[0]) + fmtFull(comb_net[0]));
-  updateCell('comb_net2', sign(comb_net[1]) + fmtFull(comb_net[1]));
-  updateCell('comb_net3', sign(comb_net[2]) + fmtFull(comb_net[2]));
+  // ── UPDATE ALL TABLE CELLS ──
+  uc('ma_rev1',fmtM(a_rev[0])+' EGP'); uc('ma_rev2',fmtM(a_rev[1])+' EGP'); uc('ma_rev3',fmtM(a_rev[2])+' EGP');
+  uc('ma_cost1',fmtM(a_cost[0])+' EGP'); uc('ma_cost2',fmtM(a_cost[1])+' EGP'); uc('ma_cost3',fmtM(a_cost[2])+' EGP');
+  uc('ma_net1',sgn(a_net[0])+fmtM(a_net[0])+' EGP'); uc('ma_net2',sgn(a_net[1])+fmtM(a_net[1])+' EGP'); uc('ma_net3',sgn(a_net[2])+fmtM(a_net[2])+' EGP');
+  uc('mb_rev1',fmtM(b_rev[0])+' EGP'); uc('mb_rev2',fmtM(b_rev[1])+' EGP'); uc('mb_rev3',fmtM(b_rev[2])+' EGP');
+  uc('mb_cost1',fmtM(b_cost[0])+' EGP'); uc('mb_cost2',fmtM(b_cost[1])+' EGP'); uc('mb_cost3',fmtM(b_cost[2])+' EGP');
+  uc('mb_net1',sgn(b_net[0])+fmtM(b_net[0])+' EGP'); uc('mb_net2',sgn(b_net[1])+fmtM(b_net[1])+' EGP'); uc('mb_net3',sgn(b_net[2])+fmtM(b_net[2])+' EGP');
+  uc('comb_rev1',fmtM(cr[0])); uc('comb_rev2',fmtM(cr[1])); uc('comb_rev3',fmtM(cr[2]));
+  uc('comb_cum_rev',fmtM(ctot)); uc('comb_cum_cost',fmtM(citot));
+  uc('comb_cost1',fmtM(cc[0])); uc('comb_cost2',fmtM(cc[1])); uc('comb_cost3',fmtM(cc[2]));
+  uc('comb_net1',sgn(cn[0])+fmtM(cn[0])); uc('comb_net2',sgn(cn[1])+fmtM(cn[1])); uc('comb_net3',sgn(cn[2])+fmtM(cn[2]));
+  uc('comb_cum',sgn(ccum)+fmtM(ccum));
 }
 
-function updateCell(id, val) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (el.textContent !== val) {
-    el.textContent = val;
-    el.classList.add('flash');
-    setTimeout(() => el.classList.remove('flash'), 600);
-  }
-}
+function uc(id,val) { const e=document.getElementById(id); if(!e||e.textContent===val) return; e.textContent=val; e.classList.add('flash'); setTimeout(()=>e.classList.remove('flash'),600); }
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.preset-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      setPreset(btn.dataset.preset);
-    });
-  });
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelectorAll('.preset-btn').forEach(b=>{ b.addEventListener('click', ()=>{ document.querySelectorAll('.preset-btn').forEach(x=>x.classList.remove('active')); b.classList.add('active'); setPreset(b.dataset.preset); }); });
   recalc();
 });
 </script>
-
 </body>
 </html>
