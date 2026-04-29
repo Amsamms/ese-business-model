@@ -266,8 +266,8 @@
       <span style="font-size:0.93rem;">
         Invest <strong><span class="live-val" id="sum_total_invest">20.5M</span> EGP</strong> &nbsp;→&nbsp;
         Earn <strong><span class="live-val" id="sum_total_rev">17.2M</span> EGP</strong> &nbsp;→&nbsp;
-        Net <strong style="color:var(--red);"><span class="live-val" id="sum_total_net">-3.3M</span> EGP</strong>
-        &nbsp;|&nbsp; <strong>Payback: <span class="live-val" id="sum_payback">Beyond 3 years</span></strong>
+        Net <strong style="color:var(--red);"><span class="live-val" id="sum_total_net">-8.7M</span> EGP</strong>
+        &nbsp;|&nbsp; <strong>Payback: <span class="live-val" id="sum_payback">~5 years</span></strong>
       </span>
     </div>
 
@@ -581,7 +581,7 @@
         </tbody>
       </table>
     </div>
-    <p style="font-size:0.85rem;color:var(--muted)">Track A breaks even around month 22 (late Year 2). By itself, it's a modest business — but its real value is proving that engineers want ESE and feeding feedback into Track B.</p>
+    <p style="font-size:0.85rem;color:var(--muted)">Track A breaks even around Y3Q4 (month ~33). The mandatory Y1 hardware purchase pushes break-even later than the old cloud-first model. Track A is a modest standalone business — its real strategic value is proving engineers want ESE and feeding feedback into Track B.</p>
   </div>
 </section>
 
@@ -814,14 +814,15 @@ function recalc() {
       '</div>';
   } else {
     hero.innerHTML =
-      '<div class="question">The combined investment is not recovered within 3 years</div>' +
-      '<div class="answer bad">Beyond 3 years</div>' +
-      '<div class="context">Track B is a strategic investment — it builds the reference list needed for high-ticket Model C deals from Year 4 onward. Track A alone breaks even in ~22 months.</div>' +
+      '<div class="question">The full investment recovers in approximately</div>' +
+      '<div class="answer" style="color:#f6ad55">5 years</div>' +
+      '<div class="context">The mandatory Y1 hardware purchase (5.5M EGP) pushes combined break-even to ~Year 5. Track A alone breaks even around Y3Q4. Track B is a strategic investment — it builds the EGPC-compliant reference list needed for high-ticket Model C deals from Year 4 onward.</div>' +
       '<div class="payback-details">' +
         '<div class="pd-item"><div class="val">' + fmtM(citot) + ' EGP</div><div class="lbl">Total invested over 3 years</div></div>' +
         '<div class="pd-item"><div class="val">' + fmtM(ctot) + ' EGP</div><div class="lbl">Total earned over 3 years</div></div>' +
         '<div class="pd-item"><div class="val" style="color:#fc8181">' + sgn(ccum) + fmtM(ccum) + ' EGP</div><div class="lbl">Net result after 3 years</div></div>' +
-        '<div class="pd-item"><div class="val" style="color:#68d391">~22 months</div><div class="lbl">Track A alone breaks even</div></div>' +
+        '<div class="pd-item"><div class="val" style="color:#f6ad55">~Year 5</div><div class="lbl">Combined break-even</div></div>' +
+        '<div class="pd-item"><div class="val" style="color:#68d391">~Y3Q4</div><div class="lbl">Track A alone breaks even</div></div>' +
       '</div>';
   }
 
