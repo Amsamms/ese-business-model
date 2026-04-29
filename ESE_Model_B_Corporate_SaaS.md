@@ -8,7 +8,7 @@
 
 ## 1. Product definition (what EPROM sells)
 
-Two simple SaaS SKUs, priced for Egyptian economic reality. Delivered via EPROM-hosted cloud platform (Claude API initially, self-host only when volume justifies). Each customer gets an isolated tenant (separate DB schema, AI credits pool, admin panel).
+Two simple SaaS SKUs, priced for Egyptian economic reality. Delivered via EPROM-hosted platform with in-house AI (Qwen3-32B on 4× A100 80GB, mandatory for EGPC data sovereignty compliance). Each customer gets an isolated tenant (separate DB schema, AI credits pool, admin panel).
 
 | SKU | Price (list, EGP/yr) | Scope | Target buyer |
 |---|---|---|---|
@@ -47,7 +47,7 @@ Egypt has ~10-12 EGPC downstream refining subsidiaries. This is the addressable 
 
 **Realistic capture Y3:** 70-80% = **~1.2-1.5M EGP/yr**. This is the honest ceiling for Egypt's petroleum sector right now.
 
-**Critical insight:** This TAM alone does NOT justify a self-hosted GPU server. Model B stays lean — Claude API → RunPod when volume hits — until Model C (on-prem appliance, deferred to Y2-3) places hardware at customer sites on their budget.
+**Critical insight:** This TAM alone does NOT justify a self-hosted GPU server. However, EGPC data sovereignty makes in-house AI mandatory regardless of TAM size. The hardware purchase is the entry ticket to the EGPC market — Model B carries 75% of the cost because the EGPC requirement drives the purchase.
 
 ## 3. Pricing rationale
 
@@ -125,48 +125,50 @@ Lean marketing — relationship-based, not ad-spend heavy. EPROM already has the
 | **Y3 total** | | **2,250** |
 | **3-yr total** | | **3,475** |
 
-### Costs — cloud-first, lean team
+### Costs — in-house AI from Day 1, hardware in base case
 
 | Category | Y1 | Y2 | Y3 | Notes |
 |---|---|---|---|---|
-| Team salaries | 600 | 1,200 | 1,800 | See hiring plan — 4→7→10 FTE lean |
-| Claude API / RunPod hosting | 50 | 180 | 360 | API costs scale with users. Migrate to RunPod when >5 companies |
+| Team salaries | 600 | 1,200 | 1,800 | See hiring plan — lean FTE |
+| Hardware capex (75% of 5,500K) | 4,125 | — | — | One-time, EGPC-mandated, Egypt landed |
+| Colocation + electricity (75% of 420K/yr) | 315 | 315 | 315 | Data center hosting for GPU server |
+| DevOps/ML engineer (75% of 360K/yr) | 135 | 270 | 270 | Shared hire, Model A pays 25% |
 | Existing EC2 + cloud infra | 36 | 60 | 90 | Already running; marginal cost only |
 | Marketing & sales | 700 | 500 | 600 | Relationship-driven, low spend |
 | Customer acquisition (travel, demos) | 100 | 200 | 300 | Site visits, POC setup |
 | Legal / EULA / contracts | 150 | 50 | 50 | Y1: EULA templates + simple SaaS terms |
 | ITIDA registration | 50 | — | — | One-time |
 | Ingestion delivery (COGS) | 0 | 100 | 150 | Contractor OCR + curation per engagement |
-| Misc / contingency (10%) | 170 | 230 | 335 | |
-| **Total** | **1,856** | **2,520** | **3,685** | |
+| Misc / contingency | 100 | 160 | 345 | |
+| **Total** | **6,311** | **2,855** | **3,920** | |
 
 ### Net cash flow
 
 | Year | Revenue | Costs | Net |
 |---|---|---|---|
-| Y1 | 75 | 1,856 | **-1,781** |
-| Y2 | 1,150 | 2,520 | **-1,370** |
-| Y3 | 2,250 | 3,685 | **-1,435** |
-| **3-yr cumulative** | 3,475 | 8,061 | **-4,586** |
+| Y1 | 75 | 6,311 | **-6,236** |
+| Y2 | 1,150 | 2,855 | **-1,705** |
+| Y3 | 2,250 | 3,920 | **-1,670** |
+| **3-yr cumulative** | 3,475 | 13,086 | **-9,611** |
 
-**Honest assessment:** Model B standalone is cash-negative through Y3 at this pricing level. It requires Model A (individual SaaS) to carry the shared costs OR it's the EGPC strategic play that EPROM subsidizes for 2-3 years as market entry. **This is the economic reality of selling software to Egyptian petroleum in 2026.**
+**Honest assessment:** Model B standalone is deeply cash-negative through Y3 — the mandatory hardware purchase in Y1 accounts for nearly half the 3-year costs. EGPC data sovereignty makes in-house AI non-negotiable; the hardware is the entry ticket to the market. Model A (individual SaaS) must carry shared costs during the ramp. **This is the economic reality of selling software to Egyptian petroleum in 2026 with in-house AI.**
 
-**Break-even realistically Y4-Y5** when 10 companies at steady state (1.8M/yr revenue) cover the lean team (2M/yr costs). The gap is small enough to close with 2-3 ingestion packs or seat expansions per year.
+**Break-even realistically Y5-Y6** when 10 companies at steady state (1.8M/yr revenue) cover the lean team (~2M/yr costs). Hardware capex recovery extends the timeline significantly vs. the old cloud-first model.
 
 ## 6. ROI / payback
 
 | Metric | Conservative | Realistic | Aggressive |
 |---|---|---|---|
 | Y3 revenue | 1,800 | 2,250 | 3,000 |
-| Y3 costs | 3,200 | 3,685 | 4,500 |
-| 3-yr net | -5,500 | **-4,586** | -2,500 |
-| Payback | Y5+ | Y4-Y5 | Y4 |
+| Y3 costs | 3,500 | 3,920 | 4,800 |
+| 3-yr net | -11,000 | **-9,611** | -7,000 |
+| Payback | Y7+ | Y5-Y6 | Y5 |
 | Y5 run-rate ARR | ~1.5M | ~1.8M | ~2.5M |
-| Y5 net | ~+200K | ~+500K | ~+1M |
+| Y5 net | ~-200K | ~+100K | ~+500K |
 
-**Model B ROI is NOT a standalone financial return story.** It's a **strategic market-entry investment**: establish ESE inside EGPC refineries at a price they can say yes to, build references, then expand via Model C (on-prem appliance at 8-18M) and Model D (Giza channel at larger scale).
+**Model B ROI is NOT a standalone financial return story.** The mandatory in-house AI hardware (4,125K EGP, Model B's 75% share) makes standalone profitability impossible before Y5. It's a **strategic market-entry investment**: establish ESE inside EGPC refineries at a price they can say yes to, build EGPC-compliant references, then expand via Model C (on-prem appliance at 8-18M) and Model D (Giza channel at larger scale).
 
-**The real return:** 10 EGPC refinery references = the credential to sell Model C at 10× the ticket size.
+**The real return:** 10 EGPC refinery references with in-house AI compliance = the credential to sell Model C at 10× the ticket size.
 
 ## 7. Hiring — lean team
 
@@ -178,8 +180,9 @@ At 100K-200K/company pricing, Model B cannot support a large dedicated team. It 
 |---|---|---|---|---|
 | M3 | Customer Success / Account Manager | 25K | 250K (partial) | Onboarding 3 pilots, SLA, relationship management |
 | M5 | BDR / Sales support (part-time) | 15K | 150K (partial) | EGPC pipeline tracking, tender docs, meeting prep |
+| M5 | DevOps/ML Engineer (75% share) | 30K | 135K (partial) | In-house GPU server ops, Qwen3-32B, tenant isolation |
 
-**Y1 dedicated salary: ~400K.** Plus 200K allocation from Model A shared team.
+**Y1 dedicated salary: ~535K.** Plus 200K allocation from Model A shared team.
 
 ### Y2 (+2 hires)
 
@@ -188,14 +191,14 @@ At 100K-200K/company pricing, Model B cannot support a large dedicated team. It 
 | M13 | Backend Dev (mid) | 40K | v2 stabilization, tenant provisioning, ingestion pipeline |
 | M15 | Solutions Engineer (junior) | 30K | Pre-sales demos, POC setup, on-site onboarding |
 
-**Y2 dedicated: ~1.2M EGP** (4 FTE). Model A shared allocation reduces to 100K.
+**Y2 dedicated: ~1.47M EGP** (5 FTE). Model A shared allocation reduces to 100K. Includes DevOps/ML engineer at full year (270K, 75% share).
 
 ### Y3 (+1 hire)
 - 1× Data Engineer (mid, 45K) — scale ingestion across 10 tenants
 
-**Y3 dedicated: ~1.8M EGP** (5 FTE). Total team including Model A overlap: ~7 people.
+**Y3 dedicated: ~2.07M EGP** (6 FTE). Total team including Model A overlap: ~8 people. DevOps/ML engineer at 270K (75% share).
 
-**Key difference from original:** No 17-person organization. No senior ML engineer. No DevOps. No enterprise sales lead at 120K/mo. Cloud AI removes the need for self-host expertise. Relationship sales removes the need for a dedicated enterprise rep.
+**Key difference from original:** No 17-person organization. No enterprise sales lead at 120K/mo. Relationship sales removes the need for a dedicated enterprise rep. One DevOps/ML engineer hired in Y1 to manage the in-house GPU server — shared 75/25 with Model A.
 
 ## 8. Certifications + legal (lightweight)
 
@@ -214,56 +217,50 @@ At this price point, ISO 27001 is overkill. Focus on legally-operational essenti
 
 **Why no subsidiary Y1?** At 1.8M/yr TAM, a separate legal entity with 500K/yr overhead burns 28% of revenue on admin. Run ESE as a business line within EPROM with separate P&L tracking until Y3+.
 
-## 9. Infrastructure — cloud-first, hardware reference included
+## 9. Infrastructure — in-house AI mandatory from Day 1 (EGPC requirement)
 
-**Strategy: Cloud-first in Y1-Y3. NO self-hosted GPU purchase.** The TAM (1.8M EGP/yr) doesn't justify it. But when management asks "what WOULD hardware cost?", this section answers with real numbers.
+**Strategy: Self-host hardware purchased in Y1. EGPC data sovereignty makes in-house AI non-negotiable.** The hardware purchase is the entry ticket to the EGPC market. Model B carries 75% of the hardware cost because the EGPC requirement drives the purchase.
 
-### AI Backend Phases
+### Why in-house AI is mandatory
 
-| Phase | AI Backend | Monthly Cost | Annual | When |
-|---|---|---|---|---|
-| **Current** | Claude Haiku 4.5 API | ~$35 (1,820 EGP) | ~22K EGP | Now (23 users) |
-| **Model B Y1** | Claude API, prompt caching | ~$200-400 (10-21K EGP) | ~120-250K EGP | Y1 (3 companies, ~30 users) |
-| **Model B Y2** | Claude API or RunPod Qwen3-32B | ~$800-1,500 (42-78K EGP) | ~500-940K EGP | Y2 (7 companies, ~70 users) |
-| **Model B Y3** | RunPod Qwen3-32B or self-host IF Model C justifies | ~$2,000-3,000 (104-156K EGP) | ~1.2-1.9M EGP | Re-evaluate Y2Q4 |
+EGPC will NOT accept cloud AI (Claude API, RunPod) for any product handling Egyptian refinery data. This is confirmed by Elyamani's direct conversation with EGPC. Data must stay within Egypt, on EPROM-controlled infrastructure. No cloud AI provider — regardless of data handling claims — satisfies this requirement.
 
-### Why cloud-first for Model B
+### Hardware selection: Tier 3 — Qwen3-32B on 4× A100 80GB
 
-| Reason | Detail |
-|---|---|
-| **TAM too small** | 1.8M EGP/yr steady state does NOT amortize 5-7M EGP hardware |
-| **Payback math** | 5.7M ÷ 1.8M = **3.2+ years** just to recover hardware cost — before team, marketing, or any other costs |
-| **Risk** | Self-host is a fixed sunk cost. Cloud scales down if pilots don't convert |
-| **Trigger** | Self-host only when Model C (on-prem at 8-18M per deal) places hardware on customer budget |
-
-### Self-host hardware capital costs (REFERENCE — when management asks "what if?")
-
-All prices Egypt landed (30-50% customs markup). 1 USD ≈ 52 EGP (April 2026). For detailed component breakdown see Model A Section 9.
-
-**Tier 3 — Qwen3-32B on 4× A100 80GB (entry self-host)**
+Same server serves both Model A and Model B concurrently. Model B's EGPC tenants get logical isolation within the shared Qwen3-32B instances.
 
 | Component | Cost (EGP) |
 |---|---|
 | Dell PowerEdge R760xa + 2× Xeon Gold 6438Y + 256 GB DDR5 + 4× A100 80GB + 4×1.92TB NVMe | 5,200,000 – 7,280,000 |
-| Monthly colocation + electricity | 30,000 – 40,000 |
+| **Midpoint used in financial model** | **5,500,000** |
+| Monthly colocation + electricity | 30,000 – 40,000 (35,000 midpoint = 420K/yr) |
 | Capacity | 80-100 concurrent users |
-| Break-even vs cloud (RunPod at ~90K/mo) | **5-7 years** — cloud wins |
+| Selected because | Best price/capacity for current scale; upgrade path to Tier 2/1 when Model C justifies |
 
-**Tier 2 — GLM 5.1 INT4 on 8× A100 80GB (mid-tier)**
+### Model B annual hardware costs (75% share)
 
-| Component | Cost (EGP) |
-|---|---|
-| Dell PowerEdge XE9680 + 2× Xeon Gold 6442Y + 512 GB DDR5 + 8× A100 80GB SXM4 + 4×3.84TB NVMe | 10,400,000 – 14,560,000 |
-| Capacity | GLM 5.1 INT4, 20-30 concurrent |
-| Break-even vs cloud | **3-5 years** |
+| Cost item | Total | Model B share | Y1 | Y2 | Y3 |
+|---|---|---|---|---|---|
+| Hardware capex (one-time) | 5,500K | 4,125K | 4,125K | — | — |
+| Colocation + electricity | 420K/yr | 315K/yr | 315K | 315K | 315K |
+| DevOps/ML engineer | 360K/yr | 270K/yr | 135K | 270K | 270K |
+| **Total hardware burden** | | | **4,575K** | **585K** | **585K** |
 
-**Tier 1 — GLM 5.1 FP8 on 8× H200 141GB (best quality)**
+Y1 DevOps is half-year (hire mid-Y1). Colocation runs from hardware delivery month 3.
 
-| Component | Cost (EGP) |
-|---|---|
-| Dell PowerEdge XE9680 + 2× Xeon Gold 6548Y+ + 1 TB DDR5 + 8× H200 141GB SXM5 + 8×3.84TB NVMe + 2×100GbE | 18,200,000 – 23,400,000 |
-| Capacity | GLM 5.1 FP8, 30-40 concurrent |
-| Break-even vs cloud | **2-3 years** |
+### Why Model B pays 75%
+
+Model B creates the EGPC compliance requirement that makes in-house AI mandatory. Without Model B's EGPC market, Model A would operate on cloud AI. The hardware purchase is caused by Model B's market requirement — Model B bears 75% of the cost. Model A is an incidental beneficiary at 25%.
+
+### No cloud AI costs
+
+With self-host hardware from Y1, there are **zero** Claude API or RunPod costs. This replaces the previous cloud AI line items (~50K Y1 / 180K Y2 / 360K Y3) with fixed hardware costs that do not scale with tenant count — favorable unit economics as more EGPC subsidiaries are added.
+
+### Hardware tier reference (for future scale)
+
+**Tier 2 — GLM 5.1 INT4 on 8× A100 80GB:** 10.4–14.6M EGP. 20-30 concurrent users. Upgrade path when Model C justifies dedicated per-customer hardware.
+
+**Tier 1 — GLM 5.1 FP8 on 8× H200 141GB:** 18.2–23.4M EGP. 30-40 concurrent users. Highest quality, deferred to Model C at 8-18M per deal.
 
 ### Individual GPU pricing (Egyptian market, April 2026)
 
@@ -272,8 +269,6 @@ All prices Egypt landed (30-50% customs markup). 1 USD ≈ 52 EGP (April 2026). 
 | NVIDIA A100 80GB PCIe | 80 GB | $15K-17K | ~1,135,000 | ServerBasket Egypt |
 | NVIDIA H100 80GB SXM5 | 80 GB | $35K-40K | ~1.8M-2.1M | OEM (in-server) |
 | NVIDIA H200 141GB SXM5 | 141 GB | $35K-45K | ~1.8M-2.3M | OEM (in-server) |
-| NVIDIA RTX 4090 24GB | 24 GB | $2.1K-3K | 110K-155K | Baraka / Compumarts |
-| NVIDIA RTX 5090 32GB | 32 GB | $3K-3.85K | 157K-200K | Compumarts / Baraka |
 
 ### Egyptian hardware vendors
 
@@ -281,31 +276,16 @@ All prices Egypt landed (30-50% customs markup). 1 USD ≈ 52 EGP (April 2026). 
 - **Elite Technology Egypt** — Dell, NVIDIA, HP (elite.com.eg)
 - **ServerBasket Egypt** — Dell, HP, NVIDIA, Supermicro (serverbasket.net/eg)
 - **Lenovo Egypt** — Lenovo ThinkSystem (lenovo.com/eg)
-- **Compumarts Egypt** — consumer GPUs (compumarts.com)
-- **Baraka Computer Store** — consumer GPUs (barakacomputer.net)
-
-### Cloud vs. buy break-even summary
-
-| Config | Cloud/yr (RunPod) | Buy (EGP landed) | Break-even | Verdict |
-|---|---|---|---|---|
-| 2× A100 (Qwen3-32B) | ~1.08M EGP | 5.2-7.3M | **5-7 yr** | Cloud wins for Model B |
-| 8× A100 (GLM 5.1 INT4) | ~4.34M EGP | 10.4-14.6M | **3-5 yr** | Cloud still wins |
-| 8× H200 (GLM 5.1 FP8) | ~11.99M EGP | 18.2-23.4M | **2-3 yr** | Buy only at Model C scale |
-
-### Recommendation (unchanged)
-
-- **Y1-Y3:** Claude API → RunPod. Zero hardware capital. Variable cost scales with revenue.
-- **Y4+:** Re-evaluate ONLY if Model C has placed on-prem hardware at ≥3 customer sites, creating a shared-infrastructure case. Hardware will be 30-50% cheaper by then (AI depreciation thesis).
-- **Self-host only at Model C scale** (8M+ per deal, customer pays hardware). Model B's 1.8M/yr TAM does NOT carry a 5-7M EGP capital purchase.
-- **Switching cost:** 2-3 Claude Code sessions to migrate from Claude API to RunPod Qwen3-32B (prompt recalibration only, no code changes).
 
 ### Deployment
 
-- Existing EC2/KVM infrastructure (portal, heater, pump, optimizer containers)
+- Hardware purchased Y1Q1, delivered and racked by Y1Q2
+- Existing EC2/KVM infrastructure continues to serve web frontend
+- GPU server runs both Model A and Model B concurrently with logical tenant isolation
 - Multi-tenant: separate DB schemas per customer (PostgreSQL), tenant_id on all tables
 - No VPN/MPLS at this price point — standard HTTPS + JWT auth
 - Customers access via web browser, no on-prem installation
-- Law 151/2020: no operational data leaves Egypt. Claude API calls send only engineered prompts, not raw refinery data.
+- Law 151/2020: all operational data stays on EPROM-controlled infrastructure within Egypt
 
 ## 10. Quarterly milestones
 
@@ -379,12 +359,12 @@ Model B is the EGPC play at honest Egyptian pricing. At 100-200K EGP/yr per comp
 ### Hard truths Metwally must acknowledge
 
 1. **This is not a cash cow.** At Egypt's real price ceiling, Model B is a strategic investment that builds reference cases for higher-ticket Models C/D.
-2. **No self-hosted GPU in Y1-Y3.** The TAM doesn't justify it. Cloud AI keeps costs variable and risk low.
-3. **No 17-person organization.** The team is 2-5 people leveraging existing EPROM engineers. Lean by necessity.
-4. **The real return is in Y4+.** 10 EGPC refineries as references → Model C on-prem at 8-18M per deal → Model D regional expansion via Giza.
+2. **Self-hosted GPU in Y1 — mandatory.** EGPC data sovereignty requires in-house AI. Hardware capex is 4.1M EGP (Model B's 75% share), a one-time cost that buys EGPC market access. No cloud AI alternative exists.
+3. **No 17-person organization.** The team is 2-6 people leveraging existing EPROM engineers. Lean by necessity — but now includes a DevOps/ML engineer (shared 75/25 with Model A) to manage the in-house GPU server.
+4. **The real return is in Y5+.** 10 EGPC refineries as references → Model C on-prem at 8-18M per deal → Model D regional expansion via Giza.
 
 ### Bottom line
 
-> "Model B gets ESE inside Egypt's refineries at a price they can actually pay. It won't make money on its own — but it builds the reference base that makes Model C possible. Think of it as the cost of market entry: ~5M EGP over 3 years to establish ESE as the standard AI tool across 10 EGPC refineries. From there, Model C monetizes at 10× the ticket size."
+> "Model B gets ESE inside Egypt's refineries at a price they can actually pay — with in-house AI that satisfies EGPC data sovereignty requirements. It won't make money on its own through Y5 — but it builds the compliant reference base that makes Model C possible. Think of it as the cost of market entry: ~9.6M EGP over 3 years to establish ESE as the standard AI tool across 10 EGPC refineries with Egyptian-sovereign infrastructure. From there, Model C monetizes at 10× the ticket size."
 
-**Recommend:** Run Model B as the strategic EGPC track alongside Model A (cash-flow + feedback). The two together cost ~6.4M over 3 years combined. Model A carries the shared overhead; Model B delivers the enterprise credibility.
+**Recommend:** Run Model B as the strategic EGPC track alongside Model A (cash-flow + feedback). The two together show a combined 3-year net of approximately -8.7M EGP. Model A carries the shared overhead; Model B delivers the enterprise credibility and EGPC compliance.

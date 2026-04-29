@@ -100,35 +100,36 @@ Align with ESE's existing AI Credits system (1 unit = 10,000 tokens). Prices in 
 | Dedicated team (Model A) | 1,000K | 1,500K | 2,000K |
 | Shared v2 engineering (20% alloc) | 500K | 400K | 300K |
 | Hosting (EC2, scaling) | 60K | 120K | 180K |
-| Claude API (until Y2Q2 cutover) | 80K | 200K | — |
-| Self-hosted Qwen3-32B on RunPod (from Y2Q2) | — | 540K (3Q × 180K) | 720K |
+| Hardware capex share (25% of 5,500K) | 1,375K | — | — |
+| Colocation share (25% of 420K/yr) | 105K | 105K | 105K |
+| DevOps/ML engineer share (25%) | 45K | 90K | 90K |
 | Marketing total | 480K | 800K | 1,200K |
 | Certifications + legal (Y1 heavier) | 400K | 150K | 100K |
 | Payment gateway (~3%) | 20K | 130K | 265K |
 | Customer support tools | 30K | 50K | 80K |
 | Misc / contingency (10%) | 260K | 390K | 480K |
-| **Total** | **2,830K** | **4,280K** | **5,325K** |
+| **Total** | **4,275K** | **3,735K** | **4,800K** |
 
 ### Net cash flow
 
 | Year | Revenue | Cost | Net |
 |---|---|---|---|
-| Y1 | 650K | 2,830K | **-2,180K** |
-| Y2 | 4,300K | 4,280K | **+20K (break-even)** |
-| Y3 | 8,800K | 5,325K | **+3,475K** |
-| **3-yr cumulative** | 13,750K | 12,435K | **+1,315K** |
+| Y1 | 650K | 4,275K | **-3,625K** |
+| Y2 | 4,300K | 3,735K | **+565K** |
+| Y3 | 8,800K | 4,800K | **+4,000K** |
+| **3-yr cumulative** | 13,750K | 12,810K | **+940K** |
 
 ## 6. ROI / IRR / payback
 
-- Cumulative investment (cost Y1 + Y2 Q1 pre-revenue): ~3.6M EGP
-- **Payback:** Y2Q4 (exact break-even near month 22)
-- **3-year net:** +1.3M EGP (conservative base)
-- **3-year ROI on capital deployed:** ~37%
-- **IRR (3-yr quarterly):** ~22-28%
-- **Profitability Index:** ~1.12 (marginal — Model A standalone modest)
+- Cumulative investment (cost Y1 + Y2 Q1 pre-revenue): ~5.1M EGP
+- **Payback:** Y2Q4 (break-even near month 22)
+- **3-year net:** +0.94M EGP (conservative base)
+- **3-year ROI on capital deployed:** ~18%
+- **IRR (3-yr quarterly):** ~10-15%
+- **Profitability Index:** ~1.07 (marginal — Model A standalone modest)
 
-**Aggressive** (2× user acquisition, Arab expansion): 3-yr revenue ~25M → net +10M → ROI ~278%, IRR ~65%.
-**Conservative** (50% user acquisition, slow self-host): 3-yr revenue ~7M → net -2M → LOSS.
+**Aggressive** (2× user acquisition, Arab expansion): 3-yr revenue ~25M → net +10M → ROI ~200%, IRR ~50%.
+**Conservative** (50% user acquisition): 3-yr revenue ~7M → net -2.5M → LOSS.
 
 ## 7. Hiring plan (Egyptian salaries 2026)
 
@@ -140,11 +141,12 @@ Align with ESE's existing AI Credits system (1 unit = 10,000 tokens). Prices in 
 | Customer Support | Junior-Mid | 15K | Y1Q3 | 90K | 200K | 220K |
 | Second BDR (Arab region) | Mid-Senior | 30K + commission | Y2Q1 | — | 420K | 500K |
 | Partnerships / Channel | Senior | 40K | Y3Q1 | — | — | 520K |
-| **Model A dedicated total** | | | | **1.1M** | **1.84M** | **2.6M** |
+| DevOps/ML Engineer (25% share) | Senior | 30K | Y1Q3 | 45K | 90K | 90K |
+| **Model A dedicated total** | | | | **1.15M** | **1.93M** | **2.69M** |
 
 Plus 20% allocation of shared engineering Y1=500K, Y2=400K, Y3=300K.
 
-**Philosophy:** Keep Model A LEAN. Reuse EPROM engineering muscle; only hire sales/marketing/support directly. No ML engineers here — Qwen3-32B shared with Model B.
+**Philosophy:** Keep Model A LEAN. Reuse EPROM engineering muscle; only hire sales/marketing/support directly. DevOps/ML engineer is a shared hire with Model B (Model B pays 75%).
 
 ## 8. Certifications + legal (this tier)
 
@@ -167,33 +169,15 @@ Lighter than Track B.
 
 **Total Y1 certs + legal: ~400K EGP.** ISO 27001 deferred saves 300-500K.
 
-## 9. Infrastructure & Equipment — capital + operating costs
+## 9. Infrastructure & Equipment — mandatory self-host from Year 1
 
-### Current state
-EC2 t3.micro + KVM, Claude Haiku 4.5 API. Usage ~EGP 1,800/mo at 23-user scale.
+### Strategic decision: In-house AI is non-negotiable
 
-### Pro user math
-- Heavy session: ~30K in + 3K out ≈ $0.045 per AI-unit-10K equivalent
-- Pro (500 units/mo = 5M tokens): API cost ~$25/mo = 1,300 EGP/mo per user
-- **Pro revenue:** 1,000 EGP/mo per user → GROSS MARGIN NEGATIVE at heavy usage
+EGPC requires data sovereignty — cloud AI (Claude API, RunPod) is NOT acceptable for any product serving Egyptian petroleum refineries. The hardware purchase is mandatory from Day 1. This is the entry ticket to the EGPC market.
 
-### Mitigation
-- Prompt caching (Session 58 prototype, reverted — revisit)
-- Aggressive context windows
-- **Self-host migration trigger: paid users cross 100**
+Model A bears **25%** of the hardware cost. Model B (the EGPC enterprise track) drives the purchase and carries **75%**. Model A benefits from co-located infrastructure at a fraction of the cost.
 
-### Cloud operating costs (included in Y1-Y3 cost table above)
-
-| Phase | Provider | Monthly | Annual | Notes |
-|---|---|---|---|---|
-| Y1 | Claude Haiku API | ~$150-400 | ~80K EGP | Pay-per-token, scales with users |
-| Y2Q2+ | RunPod Qwen3-32B (2× A100) | ~$1,737 (90K EGP) | ~1.08M EGP | Flat rate regardless of usage |
-
-### Self-host hardware capital costs (one-time purchase, Egypt landed prices)
-
-All prices include 30-50% Egypt customs markup. Exchange rate: 1 USD ≈ 52 EGP (April 2026).
-
-**Tier 3 — Qwen3-32B on 4× A100 80GB (RECOMMENDED when volume justifies)**
+### Hardware selection: Tier 3 — Qwen3-32B on 4× A100 80GB
 
 | Component | Specification | Cost (EGP) |
 |---|---|---|
@@ -203,37 +187,42 @@ All prices include 30-50% Egypt customs markup. Exchange rate: 1 USD ≈ 52 EGP 
 | GPU | 4× NVIDIA A100 80GB PCIe | included |
 | Storage | 4× 1.92 TB NVMe SSD | included |
 | **Total capital cost** | | **5,200,000 – 7,280,000** |
-| Monthly operating | Colocation + electricity | ~30,000 – 40,000 |
+| **Midpoint used in model** | | **5,500,000** |
 | Capacity | 4× Qwen3-32B instances | 80-100 concurrent users |
-| Break-even vs cloud | At ~500 users | ~5-7 years |
 
-**Tier 2 — GLM 5.1 INT4 on 8× A100 80GB**
+### Model A annual hardware costs (25% share)
 
-| Component | Specification | Cost (EGP) |
+| Cost item | Total annual | Model A share | Y1 | Y2 | Y3 |
+|---|---|---|---|---|---|
+| Hardware capex (one-time) | 5,500K | 1,375K | 1,375K | — | — |
+| Colocation + electricity | 420K/yr | 105K/yr | 105K | 105K | 105K |
+| DevOps/ML engineer | 360K/yr | 90K/yr | 45K | 90K | 90K |
+| **Total hardware burden** | | | **1,525K** | **195K** | **195K** |
+
+Y1 DevOps is half-year (hire mid-Y1). Colocation runs from hardware delivery month 3.
+
+### Why Model A only pays 25%
+
+Model B (EGPC enterprise) requires in-house AI for compliance. Model B would buy this hardware regardless — Model A is a beneficiary, not the driver. The 25/75 split reflects economic causality: the EGPC requirement creates the purchase; Model A rides along at marginal cost.
+
+### No cloud AI costs
+
+With self-host hardware running from Y1, there are **zero** Claude API or RunPod costs. The hardware serves both models concurrently. This replaces the previous ~80K Y1 / 740K Y2 / 720K Y3 cloud AI line items with fixed hardware costs that don't scale with user count.
+
+### Cloud vs. self-host comparison (for reference)
+
+| Approach | 3-yr total (Model A share) | Risk profile |
 |---|---|---|
-| Server chassis | Dell PowerEdge XE9680 (6U rack) | included |
-| CPU | 2× Intel Xeon Gold 6442Y (24 cores each) | included |
-| RAM | 512 GB DDR5 ECC | included |
-| GPU | 8× NVIDIA A100 80GB SXM4 NVLink | included |
-| Storage | 4× 3.84 TB NVMe SSD | included |
-| **Total capital cost** | | **10,400,000 – 14,560,000** |
-| Capacity | GLM 5.1 INT4 | 20-30 concurrent users |
-| Break-even vs cloud | | ~3-5 years |
+| Cloud-first (old plan) | ~1,540K (API + RunPod) | Variable cost, no capex, EGPC rejection risk |
+| Self-host Y1 (new plan) | ~1,915K (capex + colo + devops) | Fixed cost, EGPC compliant |
 
-**Tier 1 — GLM 5.1 FP8 on 8× H200 141GB (best quality)**
+The self-host path costs ~375K more over 3 years for Model A's share but eliminates EGPC compliance risk entirely — a trade that pays for itself with a single EGPC subsidiary contract.
 
-| Component | Specification | Cost (EGP) |
-|---|---|---|
-| Server chassis | Dell PowerEdge XE9680 (6U rack) | included |
-| CPU | 2× Intel Xeon Gold 6548Y+ (32 cores each) | included |
-| RAM | 1 TB DDR5 ECC | included |
-| GPU | 8× NVIDIA H200 141GB SXM5 NVLink | included |
-| Storage | 8× 3.84 TB NVMe SSD | included |
-| Network | 2× 100GbE | included |
-| PSU | 6× 3000W redundant | included |
-| **Total capital cost** | | **18,200,000 – 23,400,000** |
-| Capacity | GLM 5.1 FP8 | 30-40 concurrent users |
-| Break-even vs cloud | | ~2-3 years |
+### Hardware tier reference (other options for context)
+
+**Tier 2 — GLM 5.1 INT4 on 8× A100 80GB:** 10.4–14.6M EGP. 20-30 concurrent users. Not selected — overkill for current volume.
+
+**Tier 1 — GLM 5.1 FP8 on 8× H200 141GB:** 18.2–23.4M EGP. 30-40 concurrent users. Deferred to Model C scale.
 
 ### Individual GPU pricing (Egyptian market, April 2026)
 
@@ -242,32 +231,21 @@ All prices include 30-50% Egypt customs markup. Exchange rate: 1 USD ≈ 52 EGP 
 | NVIDIA A100 80GB PCIe | 80 GB | $15K–$17K | ~1,135,000 | ServerBasket Egypt |
 | NVIDIA H100 80GB SXM5 | 80 GB | $35K–$40K | ~1.8M–2.1M | OEM (in-server) |
 | NVIDIA H200 141GB SXM5 | 141 GB | $35K–$45K | ~1.8M–2.3M | OEM (in-server) |
-| NVIDIA RTX 4090 24GB | 24 GB | $2.1K–$3K | 110K–155K | Baraka / Compumarts |
-| NVIDIA RTX 5090 32GB | 32 GB | $3K–$3.85K | 157K–200K | Compumarts / Baraka |
-| Dell PowerEdge T560 | server | — | ~120K–180K | Elite Technology |
 
 ### Egyptian vendors (authorized partners)
+
 - **Caironix Egypt** — Dell, Supermicro, NVIDIA, HP (caironix.com)
 - **Elite Technology Egypt** — Dell, NVIDIA, HP (elite.com.eg)
 - **ServerBasket Egypt** — Dell, HP, NVIDIA, Supermicro (serverbasket.net/eg)
 - **Lenovo Egypt** — Lenovo ThinkSystem (lenovo.com/eg)
-- **Compumarts Egypt** — consumer GPUs (compumarts.com)
-- **Baraka Computer Store** — consumer GPUs (barakacomputer.net)
 
-### Cloud vs. buy break-even
+### Deployment model
 
-| Configuration | Cloud (RunPod/yr) | Buy Hardware | Break-even |
-|---|---|---|---|
-| 2× A100 (Qwen3-32B) | ~1.08M EGP/yr | 5.2–7.3M EGP | **5–7 years** → cloud wins |
-| 8× A100 (GLM 5.1 INT4) | ~4.34M EGP/yr | 10.4–14.6M EGP | **3–5 years** |
-| 8× H100 (GLM 5.1 FP8) | ~11.99M EGP/yr | 25.5–32.8M EGP | **2–3 years** → buy wins |
+Hardware is purchased in Y1Q1, delivered and racked by Y1Q2. The GPU server runs both models concurrently — Model A users and Model B EGPC tenants share the same Qwen3-32B instances with logical tenant isolation. No per-tenant hardware separation needed at this scale.
 
-### Recommendation
-- **Y1:** Claude API + caching, ~30K/mo at 150 users. Zero capital cost.
-- **Y2Q2 (~300 users):** Migrate to RunPod Qwen3-32B at 90K/mo. Still zero capital. Caps cost risk, improves margin.
-- **Y3:** Evaluate self-host purchase only if Model B/C/D budget justifies. Hardware gets cheaper each year (AI depreciation thesis).
-- **Capital cost note:** Tier 3 self-host hardware (5-7M EGP) is a single Board-level decision. Not required before Y3.
-- **Switching cost:** 2-3 Claude Code sessions of infra work + prompt recalibration (Haiku → Qwen3).
+### Migration path
+
+No migration needed — we start self-hosted from day one. The existing EC2/KVM infrastructure continues to serve the web frontend, while AI inference runs on the local GPU server. This is a greenfield self-host deployment, not a cloud-to-on-prem migration.
 
 ## 10. Quarterly milestones
 
@@ -353,14 +331,14 @@ Near-zero marginal cost. The Community Manager already in the hiring plan owns t
 1. Ticket mismatch. 500K EGP/yr max SKU vs $3B ANOPC. 3-yr Model A revenue (13.75M) = 0.5% of ANOPC annual O&M budget. Not meaningful.
 2. Sales motion EPROM doesn't have. B2C SaaS = 12 months to build.
 3. Strategic irrelevance to ANOPC. Doesn't help end-2026 deadline.
-4. ROI modest (~22-28% IRR). EPROM gets this from typical O&M contracts.
+4. ROI modest (~10-15% IRR). EPROM gets better returns from typical O&M contracts.
 
 ### Model A as PARALLEL TRACK to Model B/C? YES, with conditions.
 1. Product proof point for Track B. When pitching EGPC at MIDOR/CORC/ASORC, "1,500 paying engineers across Arab region" = social proof worth more than Model A's revenue.
 2. Funds Track B during 12-24 month cycle. Break-even Y2Q4 = when Track B enterprise closes.
 3. Keeps EGYPS 2026 momentum alive. 23 signups + future EGYPS 2027 — don't waste.
 4. Builds training/support muscle Track B needs anyway. Learn SaaS ops on low-stakes SMB before betting all on EGPC enterprise.
-5. Budget-compatible: ~3.6M cumulative investment. Fits 10M envelope even with Track B.
+5. Budget-compatible: ~5.1M cumulative investment. Fits 10M envelope even with Track B.
 
 ### Conditions for approval
 

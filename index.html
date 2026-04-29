@@ -90,6 +90,7 @@
   .cost-bar { height: 22px; background: var(--border); border-radius: 4px; overflow: hidden; }
   .cost-bar-fill { height: 100%; border-radius: 4px; transition: width 0.3s; }
   .cost-bar-fill.team { background: var(--navy); }
+  .cost-bar-fill.hw { background: #c59b27; }
   .cost-bar-fill.marketing { background: var(--blue); }
   .cost-bar-fill.infra { background: #2b6cb0; }
   .cost-bar-fill.legal { background: #3182ce; }
@@ -319,31 +320,36 @@
       </div>
       <div>
         <div style="font-size:0.85rem;color:var(--muted);line-height:1.7">
-          <p><strong style="color:var(--navy)">People (Team)</strong> — Engineers, sales, marketing, support. Salaries for the people building and selling ESE. The largest cost by far.</p>
-          <p><strong style="color:var(--navy)">Marketing</strong> — LinkedIn ads, conference booths, YouTube content, magazine ads, university programs. Everything spent to find customers.</p>
-          <p><strong style="color:var(--navy)">Infrastructure</strong> — Cloud servers (AWS EC2), AI API costs (Claude, then self-hosted Qwen3). The computers that run ESE.</p>
-          <p><strong style="color:var(--navy)">Legal & Certifications</strong> — EULA, privacy policy, trademarks, ITIDA registration. Everything needed to legally sell software.</p>
-          <p><strong style="color:var(--navy)">Other</strong> — Payment gateway fees, support tools, contingency buffer.</p>
+          <p><strong style="color:var(--navy)">Hardware &amp; Equipment</strong> — One-time purchase of the GPU server (4× NVIDIA A100 80GB, Dell R760xa). Egypt landed price with customs. The AI brain of ESE — runs in EPROM's Cairo data center.</p>
+          <p><strong style="color:var(--navy)">People (Team)</strong> — Engineers, sales, marketing, DevOps, support. Salaries for the people building and selling ESE.</p>
+          <p><strong style="color:var(--navy)">Marketing</strong> — LinkedIn ads, conference booths, YouTube content, magazine ads, university programs.</p>
+          <p><strong style="color:var(--navy)">Infrastructure &amp; Hosting</strong> — Colocation (electricity, cooling, rack space) for the GPU server, plus cloud servers (AWS EC2) for the portal.</p>
+          <p><strong style="color:var(--navy)">Legal &amp; Certifications</strong> — EULA, privacy policy, trademarks, ITIDA registration.</p>
+          <p><strong style="color:var(--navy)">Other</strong> — Payment gateway fees, support tools, travel, contingency buffer.</p>
         </div>
       </div>
     </div>
 
     <div class="stat-row" style="margin-top:16px">
       <div class="stat-card">
-        <div class="big"><span class="live-val" id="cost_team_pct">58</span>%</div>
+        <div class="big"><span class="live-val" id="cost_hw_pct">21</span>%</div>
+        <div class="lbl">goes to hardware &amp; equipment</div>
+      </div>
+      <div class="stat-card">
+        <div class="big"><span class="live-val" id="cost_team_pct">44</span>%</div>
         <div class="lbl">goes to people</div>
       </div>
       <div class="stat-card">
-        <div class="big"><span class="live-val" id="cost_mkt_pct">12</span>%</div>
+        <div class="big"><span class="live-val" id="cost_mkt_pct">8</span>%</div>
         <div class="lbl">goes to marketing</div>
       </div>
       <div class="stat-card">
-        <div class="big"><span class="live-val" id="cost_infra_pct">10</span>%</div>
-        <div class="lbl">goes to infrastructure</div>
+        <div class="big"><span class="live-val" id="cost_infra_pct">5</span>%</div>
+        <div class="lbl">goes to hosting</div>
       </div>
       <div class="stat-card">
-        <div class="big"><span class="live-val" id="cost_legal_pct">7</span>%</div>
-        <div class="lbl">goes to legal & certs</div>
+        <div class="big"><span class="live-val" id="cost_legal_pct">2</span>%</div>
+        <div class="lbl">goes to legal &amp; certs</div>
       </div>
     </div>
   </div>
@@ -353,43 +359,32 @@
 <section>
   <div class="container">
     <h2>Infrastructure &amp; Equipment — What We Run On</h2>
-    <p class="intro">ESE needs AI computing power. The strategy is <strong>cloud-first, self-host later</strong> — start cheap, prove the model, then buy hardware only when the user base justifies it.</p>
+    <p class="intro">ESE needs AI computing power — <strong>in-house, inside Egypt</strong>. EGPC refineries require data sovereignty. No refinery data leaves the country. The strategy is <strong>self-host from Day 1</strong> — purchase the GPU server upfront, run it in EPROM's Cairo data center. This is a <strong>capital investment</strong>: one-time purchase, then only electricity + maintenance.</p>
 
-    <h3 style="color:var(--blue);margin-top:20px;">Phase 1 — Cloud (Year 1–2)</h3>
-    <div class="two-col">
-      <div class="card">
-        <h4>Year 1 — Claude API</h4>
-        <p style="font-size:0.86rem;color:var(--muted);">We use Anthropic's Claude Haiku API while user count is low. No hardware to buy. Pay per token.</p>
-        <div class="stat-row" style="margin:10px 0;">
-          <div class="stat-card"><div class="big" style="font-size:1.1rem;">~80K</div><div class="lbl">EGP/year at 150 users</div></div>
-          <div class="stat-card"><div class="big" style="font-size:1.1rem;">0</div><div class="lbl">Capital cost</div></div>
-          <div class="stat-card"><div class="big" style="font-size:1.1rem;">Pay-per-use</div><div class="lbl">Scales with activity</div></div>
-        </div>
-      </div>
-      <div class="card">
-        <h4>Year 2 — RunPod Cloud GPU</h4>
-        <p style="font-size:0.86rem;color:var(--muted);">When paid users cross ~100, we migrate to our own AI model (Qwen3-32B) on cloud GPUs. Fixed monthly cost regardless of usage.</p>
-        <div class="stat-row" style="margin:10px 0;">
-          <div class="stat-card"><div class="big" style="font-size:1.1rem;">~90K</div><div class="lbl">EGP/month flat</div></div>
-          <div class="stat-card"><div class="big" style="font-size:1.1rem;">~1.08M</div><div class="lbl">EGP/year</div></div>
-          <div class="stat-card"><div class="big" style="font-size:1.1rem;">0</div><div class="lbl">Capital cost</div></div>
-        </div>
-      </div>
+    <div class="highlight" style="margin-bottom:20px;">
+      <strong>In-house AI is an EGPC requirement.</strong> Elyamani's conversation with EGPC confirmed: they will adopt ESE <em>only</em> if the AI runs on Egyptian hardware. Cloud APIs (Claude, RunPod) are not acceptable for refinery data. The hardware purchase is not optional — it is the entry ticket to the EGPC market.
     </div>
 
-    <h3 style="color:var(--blue);margin-top:24px;">Phase 2 — Self-Hosted Hardware (Year 3+, when ready)</h3>
-    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:12px;">Buying our own GPU server in Egypt eliminates the monthly cloud bill. This is a <strong>capital investment</strong> — one-time purchase, then only electricity + maintenance. All prices are Egyptian landed (including 30–50% customs markup).</p>
+    <h3 style="color:var(--navy);margin-top:20px;">Year 1 Hardware Purchase — Tier 3 (Recommended)</h3>
+    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:12px;">Qwen3-32B on 4× NVIDIA A100 80GB in a Dell PowerEdge R760xa. Handles 80–100 concurrent users — more than enough for Model A (150 engineers) + Model B (3 refineries) combined. All prices are Egyptian landed including 30–50% customs markup. 1 USD ≈ 52 EGP.</p>
+
+    <div class="stat-row" style="margin:10px 0 20px;">
+      <div class="stat-card"><div class="big" style="font-size:1.1rem;color:var(--gold)">5.5M</div><div class="lbl">EGP — one-time capital cost</div></div>
+      <div class="stat-card"><div class="big" style="font-size:1.1rem;">~35K</div><div class="lbl">EGP/month — colocation &amp; electricity</div></div>
+      <div class="stat-card"><div class="big" style="font-size:1.1rem;">0</div><div class="lbl">Cloud API bill (eliminated)</div></div>
+      <div class="stat-card"><div class="big" style="font-size:1.1rem;">80–100</div><div class="lbl">Concurrent users supported</div></div>
+    </div>
 
     <div class="table-wrap">
     <table>
-      <tr><th>Tier</th><th>What We Get</th><th>GPUs</th><th>Server Model</th><th>Capital Cost (EGP)</th><th>Capacity</th></tr>
-      <tr>
-        <td><strong>Tier 3</strong><br><span style="font-size:0.75rem;color:var(--muted);">Recommended</span></td>
+      <tr><th>Tier</th><th>What We Get</th><th>GPUs</th><th>Server</th><th>Capital Cost (EGP)</th><th>Capacity</th></tr>
+      <tr style="background:#fff9e6">
+        <td><strong>Tier 3</strong><br><span style="font-size:0.75rem;color:var(--gold);">← Selected</span></td>
         <td>Qwen3-32B × 4 instances</td>
         <td>4× A100 80GB</td>
         <td>Dell PowerEdge R760xa</td>
         <td><strong>5.2 – 7.3M</strong></td>
-        <td>80–100 concurrent users</td>
+        <td>80–100 concurrent</td>
       </tr>
       <tr>
         <td><strong>Tier 2</strong></td>
@@ -397,7 +392,7 @@
         <td>8× A100 80GB</td>
         <td>Dell PowerEdge XE9680</td>
         <td><strong>10.4 – 14.6M</strong></td>
-        <td>20–30 concurrent users</td>
+        <td>20–30 concurrent</td>
       </tr>
       <tr>
         <td><strong>Tier 1</strong></td>
@@ -405,7 +400,7 @@
         <td>8× H200 141GB</td>
         <td>Dell PowerEdge XE9680</td>
         <td><strong>18.2 – 23.4M</strong></td>
-        <td>30–40 concurrent users</td>
+        <td>30–40 concurrent</td>
       </tr>
     </table>
     </div>
@@ -422,33 +417,19 @@
     </table>
     </div>
 
-    <h3 style="color:var(--blue);margin-top:20px;">Cloud vs. Buy — When Does Hardware Pay Off?</h3>
+    <h3 style="color:var(--blue);margin-top:20px;">Annual Operating Cost After Purchase</h3>
     <div class="table-wrap">
     <table>
-      <tr><th>Configuration</th><th>Cloud (RunPod/yr)</th><th>Buy Hardware (landed)</th><th>Break-even</th></tr>
-      <tr>
-        <td><strong>2× A100</strong> (Qwen3-32B)</td>
-        <td>~1.08M EGP/yr</td>
-        <td>5.2–7.3M EGP</td>
-        <td><strong>5–7 years</strong></td>
-      </tr>
-      <tr>
-        <td><strong>8× A100</strong> (GLM 5.1 INT4)</td>
-        <td>~4.34M EGP/yr</td>
-        <td>10.4–14.6M EGP</td>
-        <td><strong>3–5 years</strong></td>
-      </tr>
-      <tr>
-        <td><strong>8× H100</strong> (GLM 5.1 FP8)</td>
-        <td>~11.99M EGP/yr</td>
-        <td>25.5–32.8M EGP</td>
-        <td><strong>2–3 years</strong></td>
-      </tr>
+      <tr><th>Cost Item</th><th>Monthly (EGP)</th><th>Annual (EGP)</th><th>Notes</th></tr>
+      <tr><td><strong>Colocation (rack + power + cooling)</strong></td><td>~35,000</td><td><strong>420,000</strong></td><td>EPROM Cairo data center or 3rd party</td></tr>
+      <tr><td><strong>DevOps / ML Engineer</strong></td><td>~30,000</td><td><strong>360,000</strong></td><td>GPU server maintenance, model updates</td></tr>
+      <tr><td><strong>Portal hosting (EC2/KVM)</strong></td><td>~5,000–10,000</td><td><strong>60,000–120,000</strong></td><td>Already running — marginal cost</td></tr>
+      <tr style="background:#f0f4ff"><td><strong>Total annual opex</strong></td><td><strong>~70,000–75,000</strong></td><td><strong>~840,000–900,000</strong></td><td>vs. ~3M/yr cloud at Y3 scale</td></tr>
     </table>
     </div>
 
     <div class="highlight" style="margin-top:16px;">
-      <strong>Recommendation:</strong> Start with cloud (Claude API Y1 → RunPod Y2). Buy hardware only when user count crosses 500+ and the model is proven. This avoids ~5-7M EGP of upfront capital risk. For the full hardware research with vendor links and deployment commands, see the <a href="EPROM-AI-Server-Research_rev2.md" style="color:var(--blue);">AI Server Research document</a>.
+      <strong>Hardware cost allocation:</strong> The GPU server is purchased once and serves both tracks. Model B (EGPC refineries) bears 75% of the cost — it is the reason we buy in-house hardware. Model A (individual engineers) benefits incidentally and bears 25%. For the full hardware research with vendor links and deployment commands, see the <a href="EPROM-AI-Server-Research_rev2.md" style="color:var(--blue);">AI Server Research document</a>.
     </div>
   </div>
 </section>
@@ -745,8 +726,18 @@ const fmtK = (v) => Math.abs(Math.round(v)).toLocaleString('en-US') + 'K';
 const sgn = (n) => n>=0?'+':'-';
 
 // ── Documented base case (K EGP) ──
-const BA = { users:[150,900,2400], rev:[650,4300,8800], cost:[2830,4280,5325], arpu:6000 };
-const BB = { comps:[3,7,10], rev:[75,1150,2250], cost:[1856,2520,3685], price:150 };
+// Hardware: Tier 3 (Qwen3-32B, 4× A100 80GB) = 5,500K one-time + 420K/yr colo + 360K/yr DevOps
+// Attribution: Model A 25%, Model B 75% (EGPC requirement drives purchase)
+// Cloud API/Claude/RunPod costs REMOVED — self-host replaces them
+const BA = { users:[150,900,2400], rev:[650,4300,8800], cost:[4275,3735,4800], arpu:6000 };
+const BB = { comps:[3,7,10], rev:[75,1150,2250], cost:[6311,2855,3920], price:150 };
+
+// Fixed hardware costs (K EGP) — do NOT scale with sliders
+const HW_CAPEX = 5500, HW_COLO = 420, HW_DEVOPS = 360;
+const HW_A = 0.25, HW_B = 0.75;
+// Variable cost bases (without cloud API/RunPod — replaced by self-host)
+const BA_VAR = [2830-80, 4280-200-540, 5325-720];
+const BB_VAR = [1856-120, 2520-250, 3685-350];
 
 const presets = {
   conservative: { a_y1:80, a_y2:400, a_y3:1200, a_arpu:4500, b_y1:2, b_y2:4, b_y3:6, b_mix:25 },
@@ -773,18 +764,24 @@ function recalc() {
   document.getElementById('b_y3_val').textContent = b_y3;
   document.getElementById('b_mix_val').textContent = Math.round(b_mix*100) + '%';
 
-  // ── Model A: scale from base ──
+  // ── Model A: scale variable costs, add fixed hardware ──
   const au = [a_y1,a_y2,a_y3];
   const a_rev = au.map((u,i) => Math.round(BA.rev[i] * (u/BA.users[i]) * (a_arpu/BA.arpu)));
-  const a_cost = au.map((u,i) => Math.round(BA.cost[i] * Math.pow(Math.max(u/BA.users[i],0.15), 0.7)));
+  const a_var = au.map((u,i) => Math.round(BA_VAR[i] * Math.pow(Math.max(u/BA.users[i],0.15), 0.7)));
+  const a_hwCapex = [Math.round(HW_CAPEX*HW_A), 0, 0];
+  const a_hwOpex = [Math.round((HW_COLO+HW_DEVOPS/2)*HW_A), Math.round((HW_COLO+HW_DEVOPS)*HW_A), Math.round((HW_COLO+HW_DEVOPS)*HW_A)];
+  const a_cost = [a_var[0]+a_hwCapex[0]+a_hwOpex[0], a_var[1]+a_hwCapex[1]+a_hwOpex[1], a_var[2]+a_hwCapex[2]+a_hwOpex[2]];
   const a_net = [a_rev[0]-a_cost[0], a_rev[1]-a_cost[1], a_rev[2]-a_cost[2]];
   const a_cum = a_net[0]+a_net[1]+a_net[2];
 
-  // ── Model B: scale from base ──
+  // ── Model B: scale variable costs, add fixed hardware ──
   const bp = 100 + b_mix*(200-100);
   const bc = [b_y1,b_y2,b_y3];
   const b_rev = bc.map((c,i) => Math.round(BB.rev[i] * (c/BB.comps[i]) * (bp/BB.price)));
-  const b_cost = bc.map((c,i) => Math.round(BB.cost[i] * Math.pow(Math.max(c/BB.comps[i],0.25), 0.6)));
+  const b_var = bc.map((c,i) => Math.round(BB_VAR[i] * Math.pow(Math.max(c/BB.comps[i],0.25), 0.6)));
+  const b_hwCapex = [Math.round(HW_CAPEX*HW_B), 0, 0];
+  const b_hwOpex = [Math.round((HW_COLO+HW_DEVOPS/2)*HW_B), Math.round((HW_COLO+HW_DEVOPS)*HW_B), Math.round((HW_COLO+HW_DEVOPS)*HW_B)];
+  const b_cost = [b_var[0]+b_hwCapex[0]+b_hwOpex[0], b_var[1]+b_hwCapex[1]+b_hwOpex[1], b_var[2]+b_hwCapex[2]+b_hwOpex[2]];
   const b_net = [b_rev[0]-b_cost[0], b_rev[1]-b_cost[1], b_rev[2]-b_cost[2]];
   const b_cum = b_net[0]+b_net[1]+b_net[2];
 
@@ -828,18 +825,27 @@ function recalc() {
       '</div>';
   }
 
-  // ── COST BARS ──
-  // Simulate cost breakdown from the model (approximate percentages)
-  const teamCost = Math.round(citot * 0.58), mktCost = Math.round(citot * 0.12), infraCost = Math.round(citot * 0.10), legalCost = Math.round(citot * 0.07), otherCost = citot - teamCost - mktCost - infraCost - legalCost;
+  // ── COST BARS (6 categories, hardware fixed, rest scales) ──
+  const hwTotal = HW_CAPEX;  // One-time hardware purchase
+  const coloTotal = Math.round(HW_COLO * 2.5);  // 3yr colocation
+  const devopsTotal = Math.round(HW_DEVOPS * 2.5);  // 3yr DevOps (partial Y1)
+  const varTotal = citot - hwTotal - coloTotal - devopsTotal;  // Variable costs
+  const teamCost = Math.round(varTotal * 0.55) + devopsTotal;  // People incl DevOps
+  const hwBar = hwTotal;  // Hardware & Equipment
+  const infraCost = Math.round(varTotal * 0.03) + coloTotal;  // Hosting & colocation
+  const mktCost = Math.round(varTotal * 0.13);
+  const legalCost = Math.round(varTotal * 0.05);
+  const otherCost = citot - teamCost - hwBar - infraCost - mktCost - legalCost;
   document.getElementById('cost_bars').innerHTML =
+    '<div class="cost-bar-row"><div class="cost-label"><strong>Hardware &amp; Equipment</strong><span>' + fmtM(hwBar) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill hw" style="width:' + (hwBar/citot*100) + '%"></div></div></div>' +
     '<div class="cost-bar-row"><div class="cost-label"><strong>People (salaries)</strong><span>' + fmtM(teamCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill team" style="width:' + (teamCost/citot*100) + '%"></div></div></div>' +
     '<div class="cost-bar-row"><div class="cost-label"><strong>Marketing</strong><span>' + fmtM(mktCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill marketing" style="width:' + (mktCost/citot*100) + '%"></div></div></div>' +
-    '<div class="cost-bar-row"><div class="cost-label"><strong>Infrastructure (cloud + AI)</strong><span>' + fmtM(infraCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill infra" style="width:' + (infraCost/citot*100) + '%"></div></div></div>' +
-    '<div class="cost-bar-row"><div class="cost-label"><strong>Legal & certifications</strong><span>' + fmtM(legalCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill legal" style="width:' + (legalCost/citot*100) + '%"></div></div></div>' +
-    '<div class="cost-bar-row"><div class="cost-label"><strong>Other (fees, tools, buffer)</strong><span>' + fmtM(otherCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill other" style="width:' + (otherCost/citot*100) + '%"></div></div></div>' +
+    '<div class="cost-bar-row"><div class="cost-label"><strong>Infrastructure &amp; Hosting</strong><span>' + fmtM(infraCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill infra" style="width:' + (infraCost/citot*100) + '%"></div></div></div>' +
+    '<div class="cost-bar-row"><div class="cost-label"><strong>Legal &amp; certifications</strong><span>' + fmtM(legalCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill legal" style="width:' + (legalCost/citot*100) + '%"></div></div></div>' +
+    '<div class="cost-bar-row"><div class="cost-label"><strong>Other (fees, tools, travel, buffer)</strong><span>' + fmtM(otherCost) + ' EGP</span></div><div class="cost-bar"><div class="cost-bar-fill other" style="width:' + (otherCost/citot*100) + '%"></div></div></div>' +
     '<div class="cost-total">Total: ' + fmtM(citot) + ' EGP over 3 years</div>';
-
   document.getElementById('cost_total_3yr').textContent = fmtM(citot);
+  document.getElementById('cost_hw_pct').textContent = Math.round(hwBar/citot*100);
   document.getElementById('cost_team_pct').textContent = Math.round(teamCost/citot*100);
   document.getElementById('cost_mkt_pct').textContent = Math.round(mktCost/citot*100);
   document.getElementById('cost_infra_pct').textContent = Math.round(infraCost/citot*100);
