@@ -710,17 +710,20 @@
      JAVASCRIPT
      ═══════════════════════════════════════════ -->
 <script>
+// Values are in thousands of EGP (K). Format for display.
 const fmt = (n) => {
-  const abs = Math.abs(Math.round(n));
-  if (abs >= 1e6) return (abs/1e6).toFixed(2) + 'M';
-  if (abs >= 1e3) return (abs/1e3).toFixed(0) + 'K';
-  return abs.toString();
+  const v = Math.round(n); // value in K EGP
+  const abs = Math.abs(v);
+  if (abs >= 1e6) return (v/1e6).toFixed(2) + 'B';  // billions
+  if (abs >= 1e3) return (v/1e3).toFixed(1) + 'M';  // millions
+  return v.toFixed(0) + 'K';                         // thousands
 };
 const fmtFull = (n) => {
-  const abs = Math.abs(Math.round(n));
-  if (abs >= 1e6) return (abs/1e6).toFixed(1) + 'M';
-  if (abs >= 1e3) return (abs/1e3).toFixed(0) + 'K';
-  return abs.toString();
+  const v = Math.round(n); // value in K EGP
+  const abs = Math.abs(v);
+  if (abs >= 1e6) return (v/1e6).toFixed(2) + 'B';
+  if (abs >= 1e3) return (v/1e3).toFixed(1) + 'M';
+  return v.toFixed(0) + 'K';
 };
 const sign = (n) => n >= 0 ? '+' : '';
 
