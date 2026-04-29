@@ -638,7 +638,7 @@
 // ── Formatting (values in thousands EGP) ──
 const fmtM = (v) => { const a=Math.abs(Math.round(v)); return a>=1e3 ? (a/1e3).toFixed(1)+'M' : a+'K'; };
 const fmtK = (v) => Math.abs(Math.round(v)).toLocaleString('en-US') + 'K';
-const sgn = (n) => n>=0?'+':'';
+const sgn = (n) => n>=0?'+':'-';
 
 // ── Documented base case (K EGP) ──
 const BA = { users:[150,900,2400], rev:[650,4300,8800], cost:[2830,4280,5325], arpu:6000 };
